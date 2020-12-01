@@ -1,0 +1,14 @@
+# AOC inputs
+session_token.txt
+
+# InteliiJ
+.idea/
+*.iml
+out/
+gen/
+build/
+build.properties
+.gradle
+
+# MacOS
+.DS_Store
