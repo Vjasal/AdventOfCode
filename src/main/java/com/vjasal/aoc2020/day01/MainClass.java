@@ -12,8 +12,8 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass(int year, int day) {
-        super(year, day);
+    private MainClass() {
+        super(2020, 1);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class MainClass extends AocMainClass {
     }
 
     public static void main(String[] args) {
-        MainClass mainClass = new MainClass(2020, 01);
+        MainClass mainClass = new MainClass();
         String input = mainClass.getInput();
         logger.info("Input:\n" + input);
 
