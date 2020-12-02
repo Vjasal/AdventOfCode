@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 public class MainClass extends AocMainClass {
 
-    private static final Logger logger = Logger.getLogger(com.vjasal.aoc2020.day01.MainClass.class.getName());
+    private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
     private MainClass() {
         super(2020, 2);
