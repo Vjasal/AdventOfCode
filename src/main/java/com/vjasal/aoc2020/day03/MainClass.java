@@ -23,7 +23,7 @@ public class MainClass extends AocMainClass {
         List<List<Character>> map = parseInput(input);
         int result = 0;
         int x = 0;
-        
+
         for (List<Character> row : map) {
             if (row.get(x) == '#') {
                 result++;
