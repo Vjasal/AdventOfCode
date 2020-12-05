@@ -41,7 +41,7 @@ class Passport {
             return false;
 
         // hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f
-        if (!fields.get("hcl").matches("^#([0-9]|[a-f]){6}$"))
+        if (!fields.get("hcl").matches("^#[0-9a-f]{6}$"))
             return false;
 
         // ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth
