@@ -1,6 +1,7 @@
 package com.vjasal.aoc2020.day03;
 
 import com.vjasal.util.AocMainClass;
+import com.vjasal.util.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 public class MainClass extends AocMainClass {
 
@@ -64,8 +64,7 @@ public class MainClass extends AocMainClass {
         try (BufferedReader reader = new BufferedReader(new StringReader(input))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                List<Character> row = line.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
-                map.add(row);
+                map.add(Util.toCharList(line));
             }
         } catch (IOException e) {
             logger.warning("Exception: " + e);
