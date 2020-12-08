@@ -56,7 +56,7 @@ public class IntcodeComputer {
 
     public boolean solve() throws IllegalOpcodeException, IOException {
         while (true) {
-            logInstruction(programCounter);
+            // logInstruction(programCounter);
             int opcode = memory.get(programCounter);
             switch (opcode % 100) {
                 case 1:
@@ -71,6 +71,18 @@ public class IntcodeComputer {
                 case 4:
                     programCounter = output(programCounter);
                     return true;
+                case 5:
+                    programCounter = jumpIfTrue(programCounter);
+                    break;
+                case 6:
+                    programCounter = jumpIfFalse(programCounter);
+                    break;
+                case 7:
+                    programCounter = lessThan(programCounter);
+                    break;
+                case 8:
+                    programCounter = equals(programCounter);
+                    break;
                 case 99:
                     return false;
                 default:
@@ -107,6 +119,40 @@ public class IntcodeComputer {
         return pc + 2;
     }
 
+    private int jumpIfTrue(int pc) throws IllegalOpcodeException {
+        int param1 = getParam(pc, 1);
+        int param2 = getParam(pc, 2);
+        if (param1 != 0)
+            return param2;
+        else
+            return pc + 3;
+    }
+
+    private int jumpIfFalse(int pc) throws IllegalOpcodeException {
+        int param1 = getParam(pc, 1);
+        int param2 = getParam(pc, 2);
+        if (param1 == 0)
+            return param2;
+        else
+            return pc + 3;
+    }
+
+    private int lessThan(int pc) throws IllegalOpcodeException {
+        int param1  = getParam(pc, 1);
+        int param2  = getParam(pc, 2);
+        int address = memory.get(pc + 3);
+        memory.set(address, param1 < param2 ? 1 : 0);
+        return pc + 4;
+    }
+
+    private int equals(int pc) throws IllegalOpcodeException {
+        int param1  = getParam(pc, 1);
+        int param2  = getParam(pc, 2);
+        int address = memory.get(pc + 3);
+        memory.set(address, param1 == param2 ? 1 : 0);
+        return pc + 4;
+    }
+
     private int getParam(int pc, int index) throws IllegalOpcodeException {
         int mode = ((memory.get(pc) / 100) / (int)Math.pow(10, index - 1)) % 10;
         if (mode == 0)
@@ -131,6 +177,18 @@ public class IntcodeComputer {
                 break;
             case 4:
                 logger.info(getInstructionParamString(pc, 2) + " - output");
+                break;
+            case 5:
+                logger.info(getInstructionParamString(pc, 3) + " - jump-if-true");
+                break;
+            case 6:
+                logger.info(getInstructionParamString(pc, 3) + " - jump-if-false");
+                break;
+            case 7:
+                logger.info(getInstructionParamString(pc, 3) + " - less-than");
+                break;
+            case 8:
+                logger.info(getInstructionParamString(pc, 3) + " - equals");
                 break;
             case 99:
                 logger.info(getInstructionParamString(pc, 1) + " - end");

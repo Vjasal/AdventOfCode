@@ -20,18 +20,31 @@ public class MainClass extends AocMainClass {
         try {
             IntcodeComputer computer = new IntcodeComputer(input);
             computer.writeInput(1);
+
+            int result = 0;
             while (computer.solve()) {
-                logger.info("out = " + computer.readOutput());
+                result = computer.readOutput();
             }
+            logger.info("Result: " + result);
         } catch (IllegalOpcodeException | IOException e) {
             logger.warning("Exception: " + e);
-            e.printStackTrace();
         }
     }
 
     @Override
     public void solvePuzzle2(String input) {
+        try {
+            IntcodeComputer computer = new IntcodeComputer(input);
+            computer.writeInput(5);
 
+            int result = 0;
+            while (computer.solve()) {
+                result = computer.readOutput();
+            }
+            logger.info("Result: " + result);
+        } catch (IllegalOpcodeException | IOException e) {
+            logger.warning("Exception: " + e);
+        }
     }
 
     public static void main(String[] args) {
