@@ -32,11 +32,11 @@ public class MainClass extends AocMainClass {
     }
 
     private Map<String, Bag> parseInput(String input) {
-        Pattern linePattern = Pattern.compile("^(\\w+\\s\\w+) bags contain ((\\d+\\s\\w+\\s\\w+\\s\\w+[,.]\\s*)*)");
-        Pattern contentPattern = Pattern.compile("^(\\d+)\\s(\\w+\\s\\w+)\\s\\w+\\.*$");
+        Pattern linePattern = Pattern.compile("^(\\w+ \\w+) bags contain ((\\d+ \\w+ \\w+ \\w+[,.] ?)*)");
+        Pattern contentPattern = Pattern.compile("^(\\d+) (\\w+ \\w+) \\w+\\.?$");
 
         Map<String, Bag> bags = new HashMap<>();
-        for (String line : Util.splitLines(input)) {
+        for (String line : Util.toLinkedListOfLines(input)) {
             Matcher lineMatcher = linePattern.matcher(line);
             if (lineMatcher.find()) {
                 String name    = lineMatcher.group(1);
