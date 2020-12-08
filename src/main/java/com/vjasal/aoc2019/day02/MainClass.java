@@ -4,6 +4,7 @@ import com.vjasal.aoc2019.intcode.IllegalOpcodeException;
 import com.vjasal.aoc2019.intcode.IntcodeComputer;
 import com.vjasal.util.AocMainClass;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public class MainClass extends AocMainClass {
@@ -22,7 +23,7 @@ public class MainClass extends AocMainClass {
             computer.writeMemory(2, 2);
             computer.solve();
             logger.info("Result: " + computer.readMemory(0));
-        } catch (IllegalOpcodeException e) {
+        } catch (IllegalOpcodeException | IOException e) {
             logger.warning("Exception: " + e);
         }
     }
@@ -42,7 +43,7 @@ public class MainClass extends AocMainClass {
                     if (computer.readMemory(0) == target) {
                         result = 100 * noun + verb;
                     }
-                } catch (IllegalOpcodeException e) {
+                } catch (IllegalOpcodeException | IOException e) {
                     logger.warning("Exception: " + e);
                 }
             }
