@@ -28,4 +28,5 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
+
 }

@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day09;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.Util;
+import com.vjasal.util.CollectionUtil;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -17,7 +17,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public void solvePuzzle1(String input) {
-        List<Long> list = Util.toLinkedListOfLines(input).stream().mapToLong(Long::parseLong).boxed()
+        List<Long> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToLong(Long::parseLong).boxed()
                 .collect(Collectors.toCollection(LinkedList::new));
 
         PreambleSet preambleSet = new PreambleSet(25);
@@ -41,7 +41,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public void solvePuzzle2(String input) {
-        List<Long> list = Util.toLinkedListOfLines(input).stream().mapToLong(Long::parseLong).boxed()
+        List<Long> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToLong(Long::parseLong).boxed()
                 .collect(Collectors.toCollection(LinkedList::new));
         long target = 22477624;
 
@@ -85,4 +85,5 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
+
 }

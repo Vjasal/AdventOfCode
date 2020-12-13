@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day11;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.Util;
+import com.vjasal.util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ public class MainClass extends AocMainClass {
     @Override
     public void solvePuzzle1(String input) {
         List<List<Character>> map = new ArrayList<>();
-        for (String line : Util.toLinkedListOfLines(input)) {
-            map.add(Util.toCharList(line));
+        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+            map.add(CollectionUtil.toCharList(line));
         }
 
         int result = 0;
@@ -34,8 +34,8 @@ public class MainClass extends AocMainClass {
     @Override
     public void solvePuzzle2(String input) {
         List<List<Character>> map = new ArrayList<>();
-        for (String line : Util.toLinkedListOfLines(input)) {
-            map.add(Util.toCharList(line));
+        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+            map.add(CollectionUtil.toCharList(line));
         }
 
         int result = 0;
@@ -153,4 +153,5 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
+
 }

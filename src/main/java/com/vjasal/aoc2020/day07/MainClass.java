@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day07;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.Util;
+import com.vjasal.util.CollectionUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class MainClass extends AocMainClass {
         Pattern contentPattern = Pattern.compile("^(\\d+) (\\w+ \\w+) \\w+\\.?$");
 
         Map<String, Bag> bags = new HashMap<>();
-        for (String line : Util.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
             Matcher lineMatcher = linePattern.matcher(line);
             if (lineMatcher.find()) {
                 String name    = lineMatcher.group(1);
@@ -75,4 +75,5 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
+
 }

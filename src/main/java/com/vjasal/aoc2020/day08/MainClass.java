@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day08;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.Util;
+import com.vjasal.util.CollectionUtil;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public void solvePuzzle1(String input) {
-        List<String> program = Util.toArrayListOfLines(input);
+        List<String> program = CollectionUtil.toArrayListOfLines(input);
         Pair<Boolean, Integer> result = simulateProgram(program);
         logger.info("Result: " + result.getValue());
     }
@@ -28,7 +28,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public void solvePuzzle2(String input) {
-        List<String> program = Util.toArrayListOfLines(input);
+        List<String> program = CollectionUtil.toArrayListOfLines(input);
 
         boolean programHalts = false;
         int accumulator = 0;
@@ -94,4 +94,5 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
+
 }

@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day03;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.Util;
+import com.vjasal.util.CollectionUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class MainClass extends AocMainClass {
         try (BufferedReader reader = new BufferedReader(new StringReader(input))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                map.add(Util.toCharList(line));
+                map.add(CollectionUtil.toCharList(line));
             }
         } catch (IOException e) {
             logger.warning("Exception: " + e);
@@ -80,4 +80,5 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
+
 }

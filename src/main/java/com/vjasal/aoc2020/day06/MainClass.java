@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day06;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.Util;
+import com.vjasal.util.CollectionUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class MainClass extends AocMainClass {
         int result = 0;
         for (String line : lines) {
             List<Set<Character>> answers = Arrays.stream(line.split(" "))
-                    .collect(LinkedList::new, (list, s) -> list.add(Util.toCharSet(s)), LinkedList::addAll);
+                    .collect(LinkedList::new, (list, s) -> list.add(CollectionUtil.toCharSet(s)), LinkedList::addAll);
 
             Iterator<Set<Character>> iterator = answers.iterator();
             Set<Character> common = iterator.next();
@@ -88,4 +88,5 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
+
 }

@@ -6,7 +6,7 @@ import java.io.StringReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Util {
+public class CollectionUtil {
 
     public static Set<Character> toCharSet(String s) {
         return s.chars().mapToObj(c -> (char) c).collect(Collectors.toSet());
@@ -14,6 +14,10 @@ public class Util {
 
     public static List<Character> toCharList(String s) {
         return s.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+    }
+
+    public static List<Integer> toIntList(String s) {
+        return s.chars().boxed().filter(c -> c >= '0' && c <= '9').map(c -> c - 48).collect(Collectors.toList());
     }
 
     public static List<String> toLinkedListOfLines(String s) {
