@@ -11,13 +11,15 @@ public class MainClass extends AocMainClass {
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
 
+        return 0;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
 
+        return 0;
     }
 
     public static void main(String[] args) {
@@ -28,5 +30,4 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
-
 }

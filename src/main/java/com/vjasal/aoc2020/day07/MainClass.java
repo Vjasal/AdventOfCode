@@ -18,17 +18,19 @@ public class MainClass extends AocMainClass {
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         Map<String, Bag> bags = parseInput(input);
         long result = bags.values().stream().filter(bag -> bag.containsBag("shiny gold")).count();
         logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         Map<String, Bag> bags = parseInput(input);
-        int res = bags.get("shiny gold").countBags() - 1;
-        logger.info("Result: " + res);
+        int result = bags.get("shiny gold").countBags() - 1;
+        logger.info("Result: " + result);
+        return result;
     }
 
     private Map<String, Bag> parseInput(String input) {
@@ -75,5 +77,4 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
-
 }

@@ -8,28 +8,31 @@ public class MainClass extends AocMainClass {
 
     private final static Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2019, 18);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         Maze maze = new Maze(input);
         MazeGraph graph = new MazeGraph(maze);
-        logger.info("Found all keys, best dist = " + graph.findShortestRoute());
+        int result = graph.findShortestRoute();
+        logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         Maze maze = new Maze(input);
         maze.replaceStart();
         MazeGraph graph = new MazeGraph(maze);
-        logger.info("Found all keys, best dist = " + graph.findShortestRoute2());
+        int result = graph.findShortestRoute2();
+        logger.info("Result: " + result);
+        return result;
     }
 
     public static void main(String[] args) {
         MainClass mainClass = new MainClass();
-
         String input = mainClass.getInput();
         logger.info("Input:\n" + input);
 

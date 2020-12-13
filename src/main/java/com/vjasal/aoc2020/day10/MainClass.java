@@ -13,12 +13,12 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2020, 10);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         List<Integer> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToInt(Integer::parseInt).boxed()
                 .collect(Collectors.toList());
 
@@ -32,11 +32,13 @@ public class MainClass extends AocMainClass {
             if (list.get(i + 1) - list.get(i) == 3) threes++;
         }
 
-        logger.info("Result: " + (ones * threes));
+        int result = ones * threes;
+        logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         List<Integer> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToInt(Integer::parseInt).boxed()
                 .collect(Collectors.toCollection(LinkedList::new));
 
@@ -67,6 +69,7 @@ public class MainClass extends AocMainClass {
         }
 
         logger.info("Result: " + result);
+        return result;
     }
 
     public static void main(String[] args) {
@@ -77,5 +80,4 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
-
 }

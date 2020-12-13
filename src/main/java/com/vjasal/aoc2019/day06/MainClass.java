@@ -11,35 +11,37 @@ import java.util.logging.Logger;
 public class MainClass extends AocMainClass {
     private final static Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2019, 6);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         Map<String, SpaceObject> objectMap = parseInputToDataStructure(input);
 
         if (!objectMap.containsKey("COM")) {
             logger.warning("No Center of Mass (COM) found");
-            return;
+            return 0;
         }
 
         SpaceObject com = objectMap.get("COM");
-        logger.info("result = " + com.getNumberOfOrbits(0));
+        int result = com.getNumberOfOrbits(0);
+        logger.info("result = " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         Map<String, SpaceObject> objectMap = parseInputToDataStructure(input);
 
         if (!objectMap.containsKey("YOU")) {
             logger.warning("You are not on map");
-            return;
+            return 0;
         }
 
         if (!objectMap.containsKey("SAN")) {
             logger.warning("Santa is not on map");
-            return;
+            return 0;
         }
 
         SpaceObject currentObject;
@@ -74,6 +76,7 @@ public class MainClass extends AocMainClass {
         }
 
         logger.info("result = " + result);
+        return result;
     }
 
     private Map<String, SpaceObject> parseInputToDataStructure(String input) {

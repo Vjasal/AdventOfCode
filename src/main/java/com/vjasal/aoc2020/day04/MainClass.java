@@ -13,22 +13,24 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2020, 4);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         List<Passport> passports = parseInput(input);
         long result = passports.stream().filter(Passport::isValid1).count();
         logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         List<Passport> passports = parseInput(input);
         long result = passports.stream().filter(Passport::isValid2).count();
         logger.info("Result: " + result);
+        return result;
     }
 
     private List<Passport> parseInput(String input) {
@@ -74,5 +76,4 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
-
 }

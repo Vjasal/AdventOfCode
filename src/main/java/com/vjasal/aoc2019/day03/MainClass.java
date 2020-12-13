@@ -10,12 +10,12 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2019, 3);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         String[] wires = input.split("\n");
         List<String> path1 = parseInput(wires[0]);
         List<String> path2 = parseInput(wires[1]);
@@ -28,10 +28,11 @@ public class MainClass extends AocMainClass {
         }
 
         logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         String[] wires = input.split("\n");
         List<String> path1 = parseInput(wires[0]);
         List<String> path2 = parseInput(wires[1]);
@@ -44,7 +45,7 @@ public class MainClass extends AocMainClass {
         }
 
         logger.info("Result: " + result);
-
+        return result;
     }
 
     private Map<Point, Integer> getIntersections(List<String> path1, List<String> path2) {

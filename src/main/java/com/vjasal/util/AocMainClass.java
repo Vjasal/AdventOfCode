@@ -22,8 +22,8 @@ public abstract class AocMainClass {
         this.day  = day;
     }
 
-    public abstract void solvePuzzle1(String input);
-    public abstract void solvePuzzle2(String input);
+    public abstract long solvePuzzle1(String input);
+    public abstract long solvePuzzle2(String input);
 
     public String getInput() {
         String input = readInputFile();

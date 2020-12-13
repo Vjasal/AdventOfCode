@@ -11,26 +11,28 @@ public class MainClass extends AocMainClass {
 
     private final static Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2019, 4);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         int min = Integer.parseInt(input.trim().split("-")[0]);
         int max = Integer.parseInt(input.trim().split("-")[1]);
 
         long result = IntStream.range(min, max + 1).filter(i -> isValidPassword1(Integer.toString(i))).count();
         logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         int min = Integer.parseInt(input.trim().split("-")[0]);
         int max = Integer.parseInt(input.trim().split("-")[1]);
 
         long result = IntStream.range(min, max + 1).filter(i -> isValidPassword2(Integer.toString(i))).count();
         logger.info("Result: " + result);
+        return result;
     }
 
     private boolean isValidPassword1(String password) {

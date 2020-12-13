@@ -13,22 +13,23 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2019, 1);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         List<Integer> masses = parseInput(input);
         long result = 0;
         for (int mass : masses) {
             result += mass / 3 - 2;
         }
         logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         List<Integer> masses = parseInput(input);
         long result = 0;
         for (int mass : masses) {
@@ -38,6 +39,7 @@ public class MainClass extends AocMainClass {
             }
         }
         logger.info("Result: " + result);
+        return result;
     }
 
     private List<Integer> parseInput(String input) {

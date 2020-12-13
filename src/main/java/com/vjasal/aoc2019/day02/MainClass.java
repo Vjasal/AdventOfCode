@@ -11,25 +11,27 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2019, 2);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         try {
             IntcodeComputer computer = new IntcodeComputer(input);
             computer.writeMemory(1, 12);
             computer.writeMemory(2, 2);
             computer.solve();
             logger.info("Result: " + computer.readMemory(0));
+            return computer.readMemory(0);
         } catch (IllegalOpcodeException | IOException e) {
             logger.warning("Exception: " + e);
         }
+        return 0;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         int target = 19690720;
         int result = -1;
 
@@ -50,6 +52,7 @@ public class MainClass extends AocMainClass {
         }
 
         logger.info("Result: " + result);
+        return result;
     }
 
     public static void main(String[] args) {

@@ -12,22 +12,24 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2020, 2);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         List<PasswordPolicy> passwords = parseInput(input);
         long result = passwords.stream().filter(this::isValidPassword1).count();
         logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         List<PasswordPolicy> passwords = parseInput(input);
         long result = passwords.stream().filter(this::isValidPassword2).count();
         logger.info("Result: " + result);
+        return result;
     }
 
     private List<PasswordPolicy> parseInput(String input) {
@@ -59,5 +61,4 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
-
 }

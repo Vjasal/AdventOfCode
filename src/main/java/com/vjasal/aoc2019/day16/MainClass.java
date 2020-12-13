@@ -13,12 +13,12 @@ public class MainClass extends AocMainClass {
 
     private final static Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    MainClass() {
         super(2019, 16);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         int[] pattern = { 0, 1, 0, -1 };
         List<Integer> signal = parseInput(input);
 
@@ -29,13 +29,14 @@ public class MainClass extends AocMainClass {
 
         int result = signal.stream().limit(8).reduce(0, (a, b) -> a * 10 + b);
         logger.info("Result: " + String.format("%08d", result));
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         if (Integer.MAX_VALUE / 10000 < input.length()) {
             logger.info("Input size too big");
-            return;
+            return 0;
         }
 
         List<Integer> signal = new ArrayList<>();
@@ -46,7 +47,7 @@ public class MainClass extends AocMainClass {
         int address = signal.stream().limit(7).reduce(0, (a, b) -> 10 * a + b);
         if (address > signal.size() || address < signal.size() / 2) {
             logger.info("Unable to solve puzzle");
-            return;
+            return 0;
         }
 
         for (int i = 0; i < 100; i++) {
@@ -55,6 +56,7 @@ public class MainClass extends AocMainClass {
 
         int result = signal.stream().skip(address).limit(8).reduce(0, (a, b) -> 10 * a + b);
         logger.info("Result: " + String.format("%08d", result));
+        return result;
     }
 
     private void fft(List<Integer> input, int[] pattern) {

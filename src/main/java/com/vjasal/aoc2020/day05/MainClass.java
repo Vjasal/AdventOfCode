@@ -5,7 +5,6 @@ import com.vjasal.util.AocMainClass;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -14,28 +13,32 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
+    public MainClass() {
         super(2020, 5);
     }
 
     @Override
-    public void solvePuzzle1(String input) {
+    public long solvePuzzle1(String input) {
         Set<Integer> ids = parseInput(input);
-        logger.info("Result: " + Collections.max(ids));
+        int result = ids.stream().max(Integer::compareTo).orElse(0);
+        logger.info("Result: " + result);
+        return result;
     }
 
     @Override
-    public void solvePuzzle2(String input) {
+    public long solvePuzzle2(String input) {
         Set<Integer> ids = parseInput(input);
 
-        int min = Collections.min(ids);
+        int min = ids.stream().min(Integer::compareTo).orElse(0);
         int i = 0;
 
         while (i < ids.size() && ids.contains(i + min)) {
             i++;
         }
 
-        logger.info("Result: " + (i + min));
+        int result = i + min;
+        logger.info("Result: " + result);
+        return result;
     }
 
     private Set<Integer> parseInput(String input) {
@@ -61,5 +64,4 @@ public class MainClass extends AocMainClass {
         mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
-
 }
