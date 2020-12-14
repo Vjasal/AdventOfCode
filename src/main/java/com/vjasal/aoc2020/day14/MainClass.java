@@ -2,8 +2,8 @@ package com.vjasal.aoc2020.day14;
 
 import com.vjasal.util.AocMainClass;
 import com.vjasal.util.CollectionUtil;
+import com.vjasal.util.MathUtil;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ public class MainClass extends AocMainClass {
 
         Pattern pattern = Pattern.compile("^mem\\[(\\d+)] = (\\d+)$");
 
-        Map<Integer, BigInteger> mem = new HashMap<>();
+        Map<Long, Long> mem = new HashMap<>();
         String mask = "";
 
         for (String line : lines) {
@@ -35,8 +35,8 @@ public class MainClass extends AocMainClass {
             } else {
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.find()) {
-                    int address      = Integer.parseInt(matcher.group(1));
-                    BigInteger value = new BigInteger(matcher.group(2));
+                    long address = Long.parseLong(matcher.group(1));
+                    long value   = Long.parseLong(matcher.group(2));
 
                     mem.put(address, applyMask1(mask, value));
                 } else {
@@ -45,9 +45,9 @@ public class MainClass extends AocMainClass {
             }
         }
 
-        BigInteger result = mem.values().stream().reduce(BigInteger.ZERO, BigInteger::add);
+        long result = mem.values().stream().reduce(0L, Long::sum);
         logger.info("Result: " + result);
-        return result.longValue();
+        return result;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class MainClass extends AocMainClass {
 
         Pattern pattern = Pattern.compile("^mem\\[(\\d+)] = (\\d+)$");
 
-        Map<BigInteger, BigInteger> mem = new HashMap<>();
+        Map<Long, Long> mem = new HashMap<>();
         String mask = "";
 
         for (String line : lines) {
@@ -65,10 +65,10 @@ public class MainClass extends AocMainClass {
             } else {
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.find()) {
-                    BigInteger address = new BigInteger(matcher.group(1));
-                    BigInteger value   = new BigInteger(matcher.group(2));
+                    long address = Long.parseLong(matcher.group(1));
+                    long value   = Long.parseLong(matcher.group(2));
 
-                    for (BigInteger maskedAddress : applyMask2(mask, address)) {
+                    for (long maskedAddress : applyMask2(mask, address)) {
                         mem.put(maskedAddress, value);
                     }
                 } else {
@@ -77,21 +77,21 @@ public class MainClass extends AocMainClass {
             }
         }
 
-        BigInteger result = mem.values().stream().reduce(BigInteger.ZERO, BigInteger::add);
+        long result = mem.values().stream().reduce(0L, Long::sum);
         logger.info("Result: " + result);
-        return result.longValue();
+        return result;
     }
 
-    private BigInteger applyMask1(String mask, BigInteger value) {
+    private long applyMask1(String mask, long value) {
         char[] array = mask.toCharArray();
 
         for (int i = 0; i < array.length; i++) {
             switch (array[array.length - 1 - i]) {
                 case '0':
-                    value = value.clearBit(i);
+                    value = MathUtil.clearBit(value, i);
                     break;
                 case '1':
-                    value = value.setBit(i);
+                    value = MathUtil.setBit(value, i);
                     break;
             }
         }
@@ -99,26 +99,29 @@ public class MainClass extends AocMainClass {
         return value;
     }
 
-    private List<BigInteger> applyMask2(String mask, BigInteger value) {
+    private List<Long> applyMask2(String mask, long value) {
         char[] array = mask.toCharArray();
 
-        List<BigInteger> result = new ArrayList<>();
+        List<Long> result = new ArrayList<>();
         result.add(value);
 
         for (int i = 0; i < array.length; i++) {
             switch (array[array.length - 1 - i]) {
                 case '1':
                     for (int k = 0; k < result.size(); k++) {
-                        result.set(k, result.get(k).setBit(i));
+                        long val = MathUtil.setBit(result.get(k), i);
+                        result.set(k, val);
                     }
                     break;
                 case 'X':
                     int size = result.size();
                     for (int k = 0; k < size; k++) {
-                        result.set(k, result.get(k).setBit(i));
+                        long val = MathUtil.setBit(result.get(k), i);
+                        result.set(k, val);
                     }
                     for (int k = 0; k < size; k++) {
-                        result.add(result.get(k).clearBit(i));
+                        long val = MathUtil.clearBit(result.get(k), i);
+                        result.add(val);
                     }
                     break;
             }

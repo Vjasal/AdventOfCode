@@ -24,4 +24,16 @@ public class MathUtil {
         return result;
     }
 
+    public static long setBit(long a, int i) {
+        if (i > Long.SIZE)
+            throw new IllegalArgumentException();
+        return a | (1L << i);
+    }
+
+    public static long clearBit(long a, int i) {
+        if (i > Long.SIZE)
+            throw new IllegalArgumentException();
+        return a & (a ^ (1L << i));
+    }
+
 }
