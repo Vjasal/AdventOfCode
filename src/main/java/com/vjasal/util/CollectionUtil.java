@@ -41,4 +41,15 @@ public class CollectionUtil {
         return lines;
     }
 
+    public static List<String> toListOfSections(String s) {
+        List<String> sections = new ArrayList<>();
+        try (Scanner scanner = new Scanner(new StringReader(s))) {
+            scanner.useDelimiter("\n\n");
+            while (scanner.hasNext()) {
+                sections.add(scanner.next());
+            }
+        }
+        return sections;
+    }
+
 }
