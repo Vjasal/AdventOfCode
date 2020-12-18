@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Hypercube {
 
-    private final Map<Integer, Map<Integer, Map<Integer, Map<Integer, Character>>>> values;
+    private final Map<Vector4<Integer, Integer, Integer, Integer>, Character> values;
 
     private int minW = Integer.MAX_VALUE;
     private int minZ = Integer.MAX_VALUE;
@@ -95,16 +95,7 @@ public class Hypercube {
     }
 
     private void put(int x, int y, int z, int w, char value) {
-        if (!values.containsKey(w))
-            values.put(w, new HashMap<>());
-
-        if (!values.get(w).containsKey(z))
-            values.get(w).put(z, new HashMap<>());
-
-        if (!values.get(w).get(z).containsKey(y))
-            values.get(w).get(z).put(y, new HashMap<>());
-
-        values.get(w).get(z).get(y).put(x, value);
+        values.put(new Vector4<>(x, y, z, w), value);
 
         if (maxW < w) maxW = w;
         if (maxZ < z) maxZ = z;
@@ -118,22 +109,12 @@ public class Hypercube {
     }
 
     private char get(int x, int y, int z, int w) {
-        if (!values.containsKey(w))
-            return '.';
-
-        if (!values.get(w).containsKey(z))
-            return '.';
-
-        if (!values.get(w).get(z).containsKey(y))
-            return '.';
-
-        if (!values.get(w).get(z).get(y).containsKey(x))
-            return '.';
-
-        return values.get(w).get(z).get(y).get(x);
+        return values.getOrDefault(new Vector4<>(x, y, z, w), '.');
     }
 
     private void clear() {
+        values.clear();
+
         minW = Integer.MAX_VALUE;
         minZ = Integer.MAX_VALUE;
         minY = Integer.MAX_VALUE;
@@ -143,8 +124,6 @@ public class Hypercube {
         maxZ = Integer.MIN_VALUE;
         maxY = Integer.MIN_VALUE;
         maxX = Integer.MIN_VALUE;
-
-        values.clear();
     }
 
     private int countNearby(int x, int y, int z, int w) {

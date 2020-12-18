@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Cube {
 
-    private final Map<Integer, Map<Integer, Map<Integer, Character>>> values;
+    private final Map<Vector3<Integer, Integer, Integer>, Character> values;
 
     private int minZ = Integer.MAX_VALUE;
     private int minY = Integer.MAX_VALUE;
@@ -82,13 +82,7 @@ public class Cube {
     }
 
     private void put(int x, int y, int z, char value) {
-        if (!values.containsKey(z))
-            values.put(z, new HashMap<>());
-
-        if (!values.get(z).containsKey(y))
-            values.get(z).put(y, new HashMap<>());
-
-        values.get(z).get(y).put(x, value);
+        values.put(new Vector3<>(x, y, z), value);
 
         if (maxZ < z) maxZ = z;
         if (maxY < y) maxY = y;
@@ -100,19 +94,12 @@ public class Cube {
     }
 
     private char get(int x, int y, int z) {
-        if (!values.containsKey(z))
-            return '.';
-
-        if (!values.get(z).containsKey(y))
-            return '.';
-
-        if (!values.get(z).get(y).containsKey(x))
-            return '.';
-
-        return values.get(z).get(y).get(x);
+        return values.getOrDefault(new Vector3<>(x, y, z), '.');
     }
 
     private void clear() {
+        values.clear();
+
         minZ = Integer.MAX_VALUE;
         minY = Integer.MAX_VALUE;
         minX = Integer.MAX_VALUE;
@@ -120,8 +107,6 @@ public class Cube {
         maxZ = Integer.MIN_VALUE;
         maxY = Integer.MIN_VALUE;
         maxX = Integer.MIN_VALUE;
-
-        values.clear();
     }
 
     private int countNearby(int x, int y, int z) {
