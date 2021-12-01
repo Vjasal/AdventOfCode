@@ -3,7 +3,6 @@ package com.vjasal.aoc2021.day01;
 import com.vjasal.util.AocMainClass;
 import com.vjasal.util.CollectionUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -42,17 +41,13 @@ public class MainClass extends AocMainClass {
                 .boxed()
                 .collect(Collectors.toList());
 
-        List<Integer> windows = new ArrayList<>(measurements.size() - 2);
-        for (int i = 0; i < measurements.size() - 2; i++) {
-            windows.add(measurements.get(i) + measurements.get(i + 1) + measurements.get(i + 2));
-        }
-
         int result = 0;
-        int previous = windows.get(0);
+        int previous = measurements.get(0);
 
-        for (int window : windows) {
-            result += previous < window ? 1 : 0;
-            previous = window;
+        // Because checking 'A + B + C < B + C + D' is the same as checking 'A < D'
+        for (int i = 0; i < measurements.size() - 3; i++) {
+            result += previous < measurements.get(i + 3) ? 1 : 0;
+            previous = measurements.get(i + 1);
         }
 
         logger.info("Result: " + result);
