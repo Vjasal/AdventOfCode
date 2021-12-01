@@ -6,8 +6,8 @@ public class MainClass extends AocMainClass {
 
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
-    private MainClass() {
-        super(2020, 2);
+    public MainClass() {
+        super(2021, 1);
     }
 
     @Override
