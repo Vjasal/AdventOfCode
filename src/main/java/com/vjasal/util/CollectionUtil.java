@@ -20,8 +20,8 @@ public class CollectionUtil {
         return s.chars().boxed().filter(c -> c >= '0' && c <= '9').map(c -> c - 48).collect(Collectors.toList());
     }
 
-    public static List<String> toLinkedListOfLines(String s) {
-        List<String> lines = new LinkedList<>();
+    public static LinkedList<String> toLinkedListOfLines(String s) {
+        LinkedList<String> lines = new LinkedList<>();
         try (Scanner scanner = new Scanner(new StringReader(s))) {
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
@@ -30,14 +30,24 @@ public class CollectionUtil {
         return lines;
     }
 
-    public static List<String> toArrayListOfLines(String s) {
-        List<String> lines = new ArrayList<>();
+    public static ArrayList<String> toArrayListOfLines(String s) {
+        ArrayList<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new StringReader(s))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException ignored) {}
+        return lines;
+    }
+
+    public static HashSet<String> toHashSetOfLines(String s) {
+        HashSet<String> lines = new HashSet<>();
+        try (Scanner scanner = new Scanner(new StringReader(s))) {
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+        }
         return lines;
     }
 
