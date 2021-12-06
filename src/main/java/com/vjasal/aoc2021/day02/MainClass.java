@@ -18,7 +18,7 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle1(String input) {
         List<Step> steps = new LinkedList<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             steps.add(new Step(line));
         }
 
@@ -46,7 +46,7 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle2(String input) {
         List<Step> steps = new LinkedList<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             steps.add(new Step(line));
         }
 

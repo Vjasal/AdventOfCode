@@ -19,7 +19,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<Integer> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToInt(Integer::parseInt).boxed()
+        List<Integer> list = CollectionUtil.toLinkedList(input).stream().mapToInt(Integer::parseInt).boxed()
                 .collect(Collectors.toList());
 
         list.add(0);
@@ -39,7 +39,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<Integer> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToInt(Integer::parseInt).boxed()
+        List<Integer> list = CollectionUtil.toLinkedList(input).stream().mapToInt(Integer::parseInt).boxed()
                 .collect(Collectors.toCollection(LinkedList::new));
 
         list.add(0);

@@ -22,7 +22,7 @@ public class MainClass extends AocMainClass {
         long twos   = 0;
         long threes = 0;
 
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             Map<Character, Integer> count = countLetters(line);
             if (count.containsValue(2)) twos++;
             if (count.containsValue(3)) threes++;
@@ -36,7 +36,7 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle2(String input) {
         List<String> seenLines = new LinkedList<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             for (String seen : seenLines) {
                 if (stringsAreAlmostEqual(line, seen)) {
                     logger.info("Result: " + getIdString(line, seen));

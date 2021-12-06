@@ -1,7 +1,5 @@
 package com.vjasal.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.StringReader;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,46 +18,46 @@ public class CollectionUtil {
         return s.chars().boxed().filter(c -> c >= '0' && c <= '9').map(c -> c - 48).collect(Collectors.toList());
     }
 
-    public static LinkedList<String> toLinkedListOfLines(String s) {
-        LinkedList<String> lines = new LinkedList<>();
-        try (Scanner scanner = new Scanner(new StringReader(s))) {
-            while (scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
-            }
-        }
-        return lines;
+    public static ArrayList<String> toListOfSections(String s) {
+        return toArrayList(s, "\n\n");
     }
 
-    public static ArrayList<String> toArrayListOfLines(String s) {
-        ArrayList<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new StringReader(s))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException ignored) {}
-        return lines;
+    public static ArrayList<String> toArrayList(String input) {
+        return toArrayList(input, "\n");
     }
 
-    public static HashSet<String> toHashSetOfLines(String s) {
-        HashSet<String> lines = new HashSet<>();
-        try (Scanner scanner = new Scanner(new StringReader(s))) {
-            while (scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
-            }
-        }
-        return lines;
+    public static ArrayList<String> toArrayList(String input, String delimiter) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        readData(arrayList, input, delimiter);
+        return arrayList;
     }
 
-    public static List<String> toListOfSections(String s) {
-        List<String> sections = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new StringReader(s))) {
-            scanner.useDelimiter("\n\n");
+    public static LinkedList<String> toLinkedList(String input) {
+        return toLinkedList(input, "\n");
+    }
+
+    public static LinkedList<String> toLinkedList(String input, String delimiter) {
+        LinkedList<String> linkedList = new LinkedList<>();
+        readData(linkedList, input, delimiter);
+        return linkedList;
+    }
+
+    public static HashSet<String> toHashSet(String input) {
+        return toHashSet(input, "\n");
+    }
+
+    public static HashSet<String> toHashSet(String input, String delimiter) {
+        HashSet<String> hashSet = new HashSet<>();
+        readData(hashSet, input, delimiter);
+        return hashSet;
+    }
+
+    private static void readData(Collection<String> collection, String input, String delimiter) {
+        try (Scanner scanner = new Scanner(new StringReader(input.trim()))) {
+            scanner.useDelimiter(delimiter);
             while (scanner.hasNext()) {
-                sections.add(scanner.next());
+                collection.add(scanner.next());
             }
         }
-        return sections;
     }
-
 }

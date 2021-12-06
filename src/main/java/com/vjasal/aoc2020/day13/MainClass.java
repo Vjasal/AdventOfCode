@@ -18,7 +18,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<String> lines = CollectionUtil.toArrayListOfLines(input);
+        List<String> lines = CollectionUtil.toArrayList(input);
 
         int start = Integer.parseInt(lines.get(0));
         List<Integer> ids = parseInput1(lines.get(1));
@@ -40,7 +40,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<String> lines = CollectionUtil.toArrayListOfLines(input);
+        List<String> lines = CollectionUtil.toArrayList(input);
         Map<Long, Long> reminders = parseInput2(lines.get(1));
 
         long m = reminders.keySet().stream().reduce(1L, (a, b) -> a * b);

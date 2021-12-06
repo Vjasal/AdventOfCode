@@ -17,7 +17,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<Long> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToLong(Long::parseLong).boxed()
+        List<Long> list = CollectionUtil.toLinkedList(input).stream().mapToLong(Long::parseLong).boxed()
                 .collect(Collectors.toCollection(LinkedList::new));
 
         PreambleSet preambleSet = new PreambleSet(25);
@@ -42,7 +42,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<Long> list = CollectionUtil.toLinkedListOfLines(input).stream().mapToLong(Long::parseLong).boxed()
+        List<Long> list = CollectionUtil.toLinkedList(input).stream().mapToLong(Long::parseLong).boxed()
                 .collect(Collectors.toCollection(LinkedList::new));
         long target = 22477624;
 
@@ -68,8 +68,8 @@ public class MainClass extends AocMainClass {
             long val = iterator1.next();
             long sum = iterator2.next();
             if (foundStart) {
-                min = min < val ? min : val;
-                max = max > val ? max : val;
+                min = Math.min(min, val);
+                max = Math.max(max, val);
             } else if (partialSums.contains(target + sum)) {
                 foundStart = true;
             }

@@ -17,7 +17,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<Integer> measurements = CollectionUtil.toArrayListOfLines(input).stream()
+        List<Integer> measurements = CollectionUtil.toArrayList(input).stream()
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<Integer> measurements = CollectionUtil.toArrayListOfLines(input).stream()
+        List<Integer> measurements = CollectionUtil.toArrayList(input).stream()
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());

@@ -22,7 +22,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<String> lines = CollectionUtil.toLinkedListOfLines(input);
+        List<String> lines = CollectionUtil.toLinkedList(input);
 
         Pattern pattern = Pattern.compile("^mem\\[(\\d+)] = (\\d+)$");
 
@@ -52,7 +52,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<String> lines = CollectionUtil.toLinkedListOfLines(input);
+        List<String> lines = CollectionUtil.toLinkedList(input);
 
         Pattern pattern = Pattern.compile("^mem\\[(\\d+)] = (\\d+)$");
 

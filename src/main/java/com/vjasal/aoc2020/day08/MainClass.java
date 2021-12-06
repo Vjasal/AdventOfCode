@@ -20,7 +20,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<String> program = CollectionUtil.toArrayListOfLines(input);
+        List<String> program = CollectionUtil.toArrayList(input);
         Pair<Boolean, Integer> result = simulateProgram(program);
         logger.info("Result: " + result.getValue());
         return result.getValue();
@@ -28,7 +28,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<String> program = CollectionUtil.toArrayListOfLines(input);
+        List<String> program = CollectionUtil.toArrayList(input);
 
         boolean programHalts = false;
         int accumulator = 0;
@@ -74,11 +74,11 @@ public class MainClass extends AocMainClass {
             String value   = program.get(programCounter).split(" ")[1];
             switch (command) {
                 case "acc":
-                    accumulator += Integer.valueOf(value);
+                    accumulator += Integer.parseInt(value);
                     programCounter += 1;
                     break;
                 case "jmp":
-                    programCounter += Integer.valueOf(value);
+                    programCounter += Integer.parseInt(value);
                     break;
                 case "nop":
                     programCounter += 1;

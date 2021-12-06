@@ -22,7 +22,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<String> lines = CollectionUtil.toLinkedListOfLines(input);
+        List<String> lines = CollectionUtil.toLinkedList(input);
         long result = lines.stream().mapToLong(this::evaluateLine).sum();
         logger.info("Result: " + result);
         return result;
@@ -30,7 +30,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<String> lines = CollectionUtil.toLinkedListOfLines(input);
+        List<String> lines = CollectionUtil.toLinkedList(input);
         long result = lines.stream().mapToLong(this::evaluateLine2).sum();
         logger.info("Result: " + result);
         return result;

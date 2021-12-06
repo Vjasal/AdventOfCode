@@ -38,7 +38,7 @@ public class MainClass extends AocMainClass {
         Pattern contentPattern = Pattern.compile("^(\\d+) (\\w+ \\w+) \\w+\\.?$");
 
         Map<String, Bag> bags = new HashMap<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             Matcher lineMatcher = linePattern.matcher(line);
             if (lineMatcher.find()) {
                 String name    = lineMatcher.group(1);

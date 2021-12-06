@@ -16,7 +16,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<String> list = CollectionUtil.toLinkedListOfLines(input);
+        List<String> list = CollectionUtil.toLinkedList(input);
 
         int x = 0;
         int y = 0;
@@ -70,7 +70,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<String> list = CollectionUtil.toLinkedListOfLines(input);
+        List<String> list = CollectionUtil.toLinkedList(input);
 
         int x = 0;
         int y = 0;

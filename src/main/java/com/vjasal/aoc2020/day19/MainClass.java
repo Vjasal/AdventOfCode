@@ -17,8 +17,8 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle1(String input) {
         List<String> sections = CollectionUtil.toListOfSections(input);
-        List<String> ruleLines  = CollectionUtil.toLinkedListOfLines(sections.get(0));
-        List<String> valueLines = CollectionUtil.toLinkedListOfLines(sections.get(1));
+        List<String> ruleLines  = CollectionUtil.toLinkedList(sections.get(0));
+        List<String> valueLines = CollectionUtil.toLinkedList(sections.get(1));
 
         RuleTree ruleTree = new RuleTree(ruleLines);
 
@@ -30,8 +30,8 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle2(String input) {
         List<String> sections = CollectionUtil.toListOfSections(input);
-        List<String> ruleLines  = CollectionUtil.toLinkedListOfLines(sections.get(0));
-        List<String> valueLines = CollectionUtil.toLinkedListOfLines(sections.get(1));
+        List<String> ruleLines  = CollectionUtil.toLinkedList(sections.get(0));
+        List<String> valueLines = CollectionUtil.toLinkedList(sections.get(1));
 
         RuleTree ruleTree = new RuleTree(ruleLines);
 

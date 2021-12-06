@@ -3,7 +3,10 @@ package com.vjasal.aoc2021.day03;
 import com.vjasal.util.AocMainClass;
 import com.vjasal.util.CollectionUtil;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class MainClass extends AocMainClass {
@@ -20,7 +23,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<String> values = CollectionUtil.toLinkedListOfLines(input);
+        List<String> values = CollectionUtil.toLinkedList(input);
         int n = values.stream().findFirst().orElse("").length();
 
         int epsilon = 0;
@@ -56,7 +59,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        Set<String> genSet = CollectionUtil.toHashSetOfLines(input);
+        Set<String> genSet = CollectionUtil.toHashSet(input);
         Set<String> scrSet = new HashSet<>(genSet);
 
         filterNumbers(genSet, 1);

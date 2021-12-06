@@ -16,7 +16,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        List<String> values = CollectionUtil.toLinkedListOfLines(input);
+        List<String> values = CollectionUtil.toLinkedList(input);
         LineMap map = new LineMap(values, true);
 
         long result = map.count();
@@ -26,7 +26,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<String> values = CollectionUtil.toLinkedListOfLines(input);
+        List<String> values = CollectionUtil.toLinkedList(input);
         LineMap map = new LineMap(values, false);
 
         long result = map.count();

@@ -19,7 +19,7 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle1(String input) {
         long result = 0;
-        for (String s : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String s : CollectionUtil.toLinkedList(input)) {
             result += Long.parseLong(s);
         }
 
@@ -29,7 +29,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle2(String input) {
-        List<String> frequencyChanges = CollectionUtil.toArrayListOfLines(input);
+        List<String> frequencyChanges = CollectionUtil.toArrayList(input);
         int index = 0;
 
         Set<Long> seen = new HashSet<>();

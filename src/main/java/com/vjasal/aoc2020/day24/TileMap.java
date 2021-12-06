@@ -16,7 +16,7 @@ public class TileMap {
 
     TileMap(String input) {
         Set<Vector2<Integer, Integer>> flippedTiles = new HashSet<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             List<String> directions = parseLine(line);
             Vector2<Integer, Integer> tile = getTile(directions);
             if (flippedTiles.contains(tile)) {

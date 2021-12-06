@@ -31,13 +31,13 @@ public class Notes {
     }
 
     private void addAllRules(String input) {
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             rules.add(new Rule(line));
         }
     }
 
     private void addAllNearbyTickets(String input) {
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             if (line.equals("nearby tickets:")) {
                 continue;
             }

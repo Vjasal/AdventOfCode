@@ -18,7 +18,7 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle1(String input) {
         List<List<Character>> map = new ArrayList<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             map.add(CollectionUtil.toCharList(line));
         }
 
@@ -35,7 +35,7 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle2(String input) {
         List<List<Character>> map = new ArrayList<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             map.add(CollectionUtil.toCharList(line));
         }
 

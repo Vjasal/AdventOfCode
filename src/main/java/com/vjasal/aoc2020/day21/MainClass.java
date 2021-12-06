@@ -84,13 +84,13 @@ public class MainClass extends AocMainClass {
         for (String ingredient : result) {
             joiner.add(ingredient);
         }
-        logger.info("Result: " + joiner.toString());
+        logger.info("Result: " + joiner);
         return 0;
     }
 
     private List<Food> parseInput(String input) {
         List<Food> foods = new LinkedList<>();
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             foods.add(new Food(line));
         }
         return foods;

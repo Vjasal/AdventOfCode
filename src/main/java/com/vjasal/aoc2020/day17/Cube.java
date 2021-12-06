@@ -21,7 +21,7 @@ public class Cube {
         values = new HashMap<>();
 
         int y = 0;
-        for (String line : CollectionUtil.toLinkedListOfLines(input)) {
+        for (String line : CollectionUtil.toLinkedList(input)) {
             int x = 0;
             for (char c : CollectionUtil.toCharList(line)) {
                 put(x, y, 0, c);

@@ -16,7 +16,7 @@ public class Deck implements Iterable<Integer> {
     private final int playerId;
 
     Deck(String input) {
-        List<String> lines = CollectionUtil.toArrayListOfLines(input);
+        List<String> lines = CollectionUtil.toArrayList(input);
         Matcher matcher = idPattern.matcher(lines.get(0));
         if (!matcher.find())
             throw new IllegalArgumentException();
