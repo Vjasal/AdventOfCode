@@ -1,5 +1,7 @@
 package com.vjasal.aoc2021.day05;
 
+import com.vjasal.util.vectors.Vector2;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,8 @@
 package com.vjasal.aoc2020.day20;
 
 import com.vjasal.util.CollectionUtil;
+import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Vector3;
 
 import java.util.*;
 import java.util.logging.Logger;

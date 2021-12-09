@@ -1,5 +1,7 @@
 package com.vjasal.aoc2020.day20;
 
+import com.vjasal.util.vectors.Vector2;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;

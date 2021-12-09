@@ -1,6 +1,7 @@
 package com.vjasal.aoc2020.day24;
 
 import com.vjasal.util.CollectionUtil;
+import com.vjasal.util.vectors.Vector2;
 
 import java.io.StringReader;
 import java.util.*;

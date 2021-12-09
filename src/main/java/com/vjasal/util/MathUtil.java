@@ -1,10 +1,6 @@
 package com.vjasal.util;
 
-import java.util.logging.Logger;
-
 public class MathUtil {
-
-    private static Logger logger = Logger.getLogger(MathUtil.class.getName());
 
     public static long mod(long a, long b) {
         long result = a % b;

@@ -1,4 +1,4 @@
-package com.vjasal.aoc2021.day05;
+package com.vjasal.util.vectors;
 
 import java.util.Objects;
 
@@ -7,16 +7,16 @@ public class Vector2<A, B> {
     private final A value1;
     private final B value2;
 
-    Vector2(A value1, B value2) {
+    public Vector2(A value1, B value2) {
         this.value1 = value1;
         this.value2 = value2;
     }
 
-    A getValue1() {
+    public A getValue1() {
         return value1;
     }
 
-    B getValue2() {
+    public B getValue2() {
         return value2;
     }
 

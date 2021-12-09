@@ -1,4 +1,4 @@
-package com.vjasal.aoc2020.day17;
+package com.vjasal.util.vectors;
 
 import java.util.Objects;
 
@@ -8,10 +8,22 @@ public class Vector3<A, B, C> {
     private final B value2;
     private final C value3;
 
-    Vector3(A value1, B value2, C value3) {
+    public Vector3(A value1, B value2, C value3) {
         this.value1 = value1;
         this.value2 = value2;
         this.value3 = value3;
+    }
+
+    public A getValue1() {
+        return value1;
+    }
+
+    public B getValue2() {
+        return value2;
+    }
+
+    public C getValue3() {
+        return value3;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.vjasal.aoc2020.day17;
 
 import com.vjasal.util.CollectionUtil;
+import com.vjasal.util.vectors.Vector3;
 
 import java.util.HashMap;
 import java.util.Map;
