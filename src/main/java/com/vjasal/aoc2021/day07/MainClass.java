@@ -31,27 +31,25 @@ public class MainClass extends AocMainClass {
         return result;
     }
 
-    private long fuelForPosition(List<Integer> values, int position) {
-        return values.stream().reduce(0, (a, b) -> {
-            int d = Math.abs(position - b);
-            return a + d * (d + 1) / 2;
-        });
-    }
-
     @Override
     public long solvePuzzle2(String input) {
         List<Integer> values = CollectionUtil.toArrayList(input, ",").stream()
                 .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
 
-        long prevFuel = fuelForPosition(values, 0);
-        for (int i = 1; i < values.size(); i++) {
-            long fuel = fuelForPosition(values, i);
-            if (prevFuel < fuel) break;
-            prevFuel = fuel;
-        }
+        double mean = values.stream().mapToDouble(Integer::doubleValue).average().orElse(-1);
 
-        logger.info("Result: " + prevFuel);
-        return prevFuel;
+        long result1 = values.stream().reduce(0, (a, b) -> {
+            int x = Math.abs(b - (int) Math.floor(mean));
+            return a + x * (x + 1) / 2;
+        });
+        long result2 = values.stream().reduce(0, (a, b) -> {
+            int x = Math.abs(b - (int) Math.ceil(mean));
+            return a + x * (x + 1) / 2;
+        });
+
+        long result = Math.min(result1, result2);
+        logger.info("Result: " + result);
+        return result;
     }
 
     public static void main(String[] args) {
