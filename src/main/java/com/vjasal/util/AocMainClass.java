@@ -11,6 +11,7 @@ public abstract class AocMainClass {
 
     private final static String SESSION_TOKEN_FILE = "session_token.txt";
     private final static String INPUT_NAME_FORMAT = "input_%d_%02d.txt";
+    private final static String RESOURCES_DIR = "src/main/resources/";
     private final static String INPUTS_DIR = "inputs";
     private final static String HOST = "https://adventofcode.com";
 
@@ -83,7 +84,8 @@ public abstract class AocMainClass {
     }
 
     private void writeInputFile(String input) {
-        File file = new File(String.format(INPUT_NAME_FORMAT, year, day));
+        String path = RESOURCES_DIR + INPUTS_DIR + "/" + String.format(INPUT_NAME_FORMAT, year, day);
+        File file = new File(path);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(input);
         } catch (IOException e) {
