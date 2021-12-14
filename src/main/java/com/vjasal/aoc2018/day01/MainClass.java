@@ -18,11 +18,7 @@ public class MainClass extends AocMainClass {
 
     @Override
     public long solvePuzzle1(String input) {
-        long result = 0;
-        for (String s : CollectionUtil.toLinkedList(input)) {
-            result += Long.parseLong(s);
-        }
-
+        long result = CollectionUtil.toLinkedList(input).stream().mapToLong(Long::parseLong).sum();
         logger.info("Result: " + result);
         return result;
     }
@@ -30,18 +26,15 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle2(String input) {
         List<String> frequencyChanges = CollectionUtil.toArrayList(input);
-        int index = 0;
 
         Set<Long> seen = new HashSet<>();
         long currentFrequency = 0;
+        int index = 0;
 
-        while (true) {
+        while (!seen.contains(currentFrequency)) {
+            seen.add(currentFrequency);
             currentFrequency += Long.parseLong(frequencyChanges.get(index));
             index = (index + 1) % frequencyChanges.size();
-            if (seen.contains(currentFrequency)) {
-                break;
-            }
-            seen.add(currentFrequency);
         }
 
         logger.info("Result: " + currentFrequency);
