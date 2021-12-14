@@ -81,7 +81,7 @@ public class MainClass extends AocMainClass {
         String input = mainClass.getInput();
         logger.info("Input:\n" + input);
 
-//        mainClass.solvePuzzle1(input);
+        mainClass.solvePuzzle1(input);
         mainClass.solvePuzzle2(input);
     }
 }

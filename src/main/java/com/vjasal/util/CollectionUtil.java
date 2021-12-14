@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 
 public class CollectionUtil {
 
+    @SafeVarargs
+    public static <T> List<T> asLinkedList(T... a) {
+        return new LinkedList<>(Arrays.asList(a));
+    }
+
     public static Set<Character> toCharSet(String s) {
         return s.chars().mapToObj(c -> (char) c).collect(Collectors.toSet());
     }
