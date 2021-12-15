@@ -2,6 +2,7 @@ package com.vjasal.aoc2021.day11;
 
 import com.vjasal.util.CollectionUtil;
 import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.VectorUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,41 +32,29 @@ public class OctopusGrid {
                 .collect(Collectors.toCollection(LinkedList::new));
         Set<Vector2<Integer, Integer>> seen = new HashSet<>();
 
+        int flashes = 0;
+
         while (!queue.isEmpty()) {
             Vector2<Integer, Integer> v = queue.poll();
             if (seen.contains(v)) continue;
+
             grid.put(v, grid.get(v) + 1);
+
             if (grid.get(v) > 9) {
                 seen.add(v);
-                queue.addAll(neighbours(v));
-            }
-        }
 
-        int flashes = 0;
-        for (Map.Entry<Vector2<Integer, Integer>, Integer> entry : grid.entrySet()) {
-            if (entry.getValue() > 9) {
-                entry.setValue(0);
+                grid.put(v, 0);
                 flashes += 1;
+
+                for (Vector2<Integer, Integer> neighbour : VectorUtil.neighbours(v, true)) {
+                    if (grid.containsKey(neighbour)) {
+                        queue.add(neighbour);
+                    }
+                }
             }
         }
 
         return flashes;
-    }
-
-    private List<Vector2<Integer, Integer>> neighbours(Vector2<Integer, Integer> v) {
-        List<Vector2<Integer, Integer>> neighbours = new LinkedList<>();
-        int[] dx = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
-        int[] dy = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
-
-        for (int k = 0; k < 9; k++) {
-            int x = v.getValue1() + dx[k];
-            int y = v.getValue2() + dy[k];
-            if (x < 0 || x >= 10) continue;
-            if (y < 0 || y >= 10) continue;
-            neighbours.add(new Vector2<>(x, y));
-        }
-
-        return neighbours;
     }
 
     @Override
