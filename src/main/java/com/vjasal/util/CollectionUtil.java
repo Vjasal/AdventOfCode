@@ -11,6 +11,28 @@ public class CollectionUtil {
         return new LinkedList<>(Arrays.asList(a));
     }
 
+    @SafeVarargs
+    public static <T> List<T> asArrayList(T... a) {
+        return new ArrayList<>(Arrays.asList(a));
+    }
+
+    public static <T> List<List<T>> permutations(List<T> list) {
+        List<List<T>> permutations = new LinkedList<>();
+        if (list.size() <= 1) {
+            permutations.add(list);
+        } else {
+            for (T val : list) {
+                List<T> tmp = new LinkedList<>(list);
+                tmp.remove(val);
+                for (List<T> next : permutations(tmp)) {
+                    next.add(val);
+                    permutations.add(next);
+                }
+            }
+        }
+        return permutations;
+    }
+
     public static Set<Character> toCharSet(String s) {
         return s.chars().mapToObj(c -> (char) c).collect(Collectors.toSet());
     }

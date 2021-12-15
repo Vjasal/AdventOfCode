@@ -1,6 +1,8 @@
 package com.vjasal.aoc2019.intcode;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringJoiner;
 import java.util.logging.Logger;
 
@@ -11,8 +13,8 @@ public class IntcodeComputer {
     private final IntcodeMemory memory;
     private int programCounter = 0;
 
-    private Integer inputRegister = null;
-    private Integer outputRegister = null;
+    private final Queue<Integer> inputRegister = new LinkedList<>();
+    private final Queue<Integer> outputRegister = new LinkedList<>();
 
     public IntcodeComputer(String program) {
         memory = new IntcodeMemory(program);
@@ -26,37 +28,29 @@ public class IntcodeComputer {
         return memory.get(address);
     }
 
-    public void writeInput(int value) throws IOException {
-        if (inputRegister != null)
+    private int readInput() throws IOException {
+        if (inputRegister.isEmpty())
             throw new IOException();
-        inputRegister = value;
+        return inputRegister.poll();
+    }
+
+    public void writeInput(int value) {
+        inputRegister.add(value);
     }
 
     public int readOutput() throws IOException {
-        if (outputRegister == null)
+        if (outputRegister.isEmpty())
             throw new IOException();
-        int value = outputRegister;
-        outputRegister = null;
-        return value;
+        return outputRegister.poll();
     }
 
-    private void writeOutput(int value) throws IOException {
-        if (outputRegister != null)
-            throw new IOException();
-        outputRegister = value;
-    }
-
-    private int readInput() throws IOException {
-        if (inputRegister == null)
-            throw new IOException();
-        int value = inputRegister;
-        inputRegister = null;
-        return value;
+    private void writeOutput(int value) {
+        outputRegister.add(value);
     }
 
     public boolean solve() throws IllegalOpcodeException, IOException {
         while (true) {
-            // logInstruction(programCounter);
+//            logInstruction(programCounter);
             int opcode = memory.get(programCounter);
             switch (opcode % 100) {
                 case 1:
@@ -113,7 +107,7 @@ public class IntcodeComputer {
         return pc + 2;
     }
 
-    private int output(int pc) throws IOException {
+    private int output(int pc) {
         int value = memory.get(memory.get(pc + 1));
         writeOutput(value);
         return pc + 2;
