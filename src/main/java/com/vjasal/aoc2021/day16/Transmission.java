@@ -1,67 +1,68 @@
 package com.vjasal.aoc2021.day16;
 
+import com.vjasal.util.CollectionUtil;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Transmission {
 
-    private final String signal;
+    private final Queue<Boolean> bitQueue = new LinkedList<>();
 
-    public Transmission(String signal) {
-        this.signal = signal;
+    public Transmission(String input) {
+        for (char c : CollectionUtil.toCharList(input)) {
+            int x = Character.getNumericValue(c);
+            for (int i = 0; i < 4; i++) {
+                bitQueue.add((x >> (3 - i % 4) & 1) == 1);
+            }
+        }
     }
 
     public Packet readPacket() {
-        return readPacket(0);
-    }
-
-    private Packet readPacket(int index) {
-        Packet packet = new Packet(read(index, 3), read(index + 3, 3));
+        Packet packet = new Packet(read(3), read(3));
 
         if (packet.getId() == 4) {
             long value = 0;
-            int i = index + 6;
+            int len = 0;
             int x;
             do {
-                x = read(i, 5);
-                i += 5;
+                x = read(5);
                 value = (value << 4) | (x & 0xf);
-            } while (x >> 4 == 1);
+                len += 5;
+            } while (((x >> 4) & 1) == 1);
             packet.setValue(value);
-            packet.setLength(i - index);
+            packet.setLength(3 + 3 + len);
         } else {
-            if (read(index + 6, 1) == 0) {
-                int length = read(index + 7, 15);
+            if (read(1) == 0) {
+                int length = read(15);
                 int len = 0;
                 while (length > len) {
-                    Packet child = readPacket(index + 22 + len);
+                    Packet child = readPacket();
                     packet.addPacket(child);
                     len += child.getLength();
                 }
-                packet.setLength(22 + len);
+                packet.setLength(3 + 3 + 1 + 15 + len);
             } else {
-                int length = read(index + 7, 11);
+                int length = read(11);
                 int len = 0;
                 for (int k = 0; k < length; k++) {
-                    Packet child = readPacket(index + 18 + len);
+                    Packet child = readPacket();
                     packet.addPacket(child);
                     len += child.getLength();
                 }
-                packet.setLength(18 + len);
+                packet.setLength(3 + 3 + 1 + 11 + len);
             }
         }
 
         return packet;
     }
 
-    private int read(int index, int length) {
+    private int read(int length) {
         int result = 0;
         for (int i = 0; i < length; i++) {
-            result = (result << 1) | getBit(index + i);
+            if (bitQueue.isEmpty()) throw new IllegalStateException("Missing data");
+            result = (result << 1) | (bitQueue.poll() ? 1 : 0);
         }
         return result;
-    }
-
-    private int getBit(int index) {
-        int i = index / 4;
-        int x = Integer.parseInt(signal.substring(i, i + 1), 16);
-        return (x >> (3 - (index % 4))) & 1;
     }
 }
