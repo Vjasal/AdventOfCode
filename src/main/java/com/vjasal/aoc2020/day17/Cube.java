@@ -1,14 +1,14 @@
 package com.vjasal.aoc2020.day17;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Vector3;
+import com.vjasal.util.vectors.Tuple3;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cube {
 
-    private final Map<Vector3<Integer, Integer, Integer>, Character> values;
+    private final Map<Tuple3<Integer, Integer, Integer>, Character> values;
 
     private int minZ = Integer.MAX_VALUE;
     private int minY = Integer.MAX_VALUE;
@@ -83,7 +83,7 @@ public class Cube {
     }
 
     private void put(int x, int y, int z, char value) {
-        values.put(new Vector3<>(x, y, z), value);
+        values.put(new Tuple3<>(x, y, z), value);
 
         if (maxZ < z) maxZ = z;
         if (maxY < y) maxY = y;
@@ -95,7 +95,7 @@ public class Cube {
     }
 
     private char get(int x, int y, int z) {
-        return values.getOrDefault(new Vector3<>(x, y, z), '.');
+        return values.getOrDefault(new Tuple3<>(x, y, z), '.');
     }
 
     private void clear() {

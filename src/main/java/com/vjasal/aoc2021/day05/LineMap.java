@@ -1,6 +1,6 @@
 package com.vjasal.aoc2021.day05;
 
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class LineMap {
     private static final Pattern linePattern = Pattern.compile("^(\\d+),(\\d+) -> (\\d+),(\\d+)$");
 
-    private final Map<Vector2<Integer, Integer>, Integer> values = new HashMap<>();
+    private final Map<Tuple2<Integer, Integer>, Integer> values = new HashMap<>();
 
     public LineMap(List<String> lines, boolean vhOnly) {
         for (String line : lines) {
@@ -58,7 +58,7 @@ public class LineMap {
     }
 
     private void putValue(int x, int y) {
-        Vector2<Integer, Integer> v = new Vector2<>(x, y);
+        Tuple2<Integer, Integer> v = new Tuple2<>(x, y);
         if (values.containsKey(v)) {
             values.put(v, values.get(v) + 1);
         } else {

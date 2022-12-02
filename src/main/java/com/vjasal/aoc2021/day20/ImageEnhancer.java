@@ -1,7 +1,7 @@
 package com.vjasal.aoc2021.day20;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ImageEnhancer {
 
-    public final Map<Vector2<Integer, Integer>, Boolean> image = new HashMap<>();
+    public final Map<Tuple2<Integer, Integer>, Boolean> image = new HashMap<>();
 
     private int minX = Integer.MAX_VALUE;
     private int minY = Integer.MAX_VALUE;
@@ -37,7 +37,7 @@ public class ImageEnhancer {
     }
 
     private void step(List<Character> algorithm, boolean defaultValue) {
-        Map<Vector2<Integer, Integer>, Boolean> tmp = new HashMap<>(image);
+        Map<Tuple2<Integer, Integer>, Boolean> tmp = new HashMap<>(image);
         int tmpMinX = minX;
         int tmpMinY = minY;
         int tmpMaxX = maxX;
@@ -51,20 +51,20 @@ public class ImageEnhancer {
         }
     }
 
-    private int getWindowValue(Map<Vector2<Integer, Integer>, Boolean> map, int x, int y, boolean defaultValue) {
+    private int getWindowValue(Map<Tuple2<Integer, Integer>, Boolean> map, int x, int y, boolean defaultValue) {
         int[] dy = {-1, -1, -1,  0,  0,  0,  1,  1,  1};
         int[] dx = {-1,  0,  1, -1,  0,  1, -1,  0,  1};
 
         int result = 0;
         for (int i = 0; i < 9; i++) {
-            Vector2<Integer, Integer> v = new Vector2<>(x + dx[i], y + dy[i]);
+            Tuple2<Integer, Integer> v = new Tuple2<>(x + dx[i], y + dy[i]);
             result = (result << 1) | (map.getOrDefault(v, defaultValue) ? 1 : 0);
         }
         return result;
     }
 
     private void put(int x, int y, boolean value) {
-        image.put(new Vector2<>(x, y), value);
+        image.put(new Tuple2<>(x, y), value);
         minX = Math.min(minX, x);
         minY = Math.min(minY, y);
         maxX = Math.max(maxX, x);
@@ -84,7 +84,7 @@ public class ImageEnhancer {
         StringBuilder sb = new StringBuilder("\n");
         for (int y = minY; y <= maxY; y++) {
             for (int x = minX; x <= maxX; x++) {
-                sb.append(image.get(new Vector2<>(x, y)) ? '#' : '.');
+                sb.append(image.get(new Tuple2<>(x, y)) ? '#' : '.');
             }
             sb.append("\n");
         }

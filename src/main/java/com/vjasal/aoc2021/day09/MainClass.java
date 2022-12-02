@@ -2,7 +2,7 @@ package com.vjasal.aoc2021.day09;
 
 import com.vjasal.util.AocMainClass;
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -62,25 +62,25 @@ public class MainClass extends AocMainClass {
         int[] dx = { 0, -1, 0, 1};
         int[] dy = {-1,  0, 1, 0};
 
-        Queue<Vector2<Integer, Integer>> queue = new LinkedList<>();
+        Queue<Tuple2<Integer, Integer>> queue = new LinkedList<>();
         List<Integer> basins = new ArrayList<>();
 
         for (int y = 0; y < map.size(); y++) {
             for (int x = 0; x < map.get(y).size(); x++) {
                 if (map.get(y).get(x) < 9) {
                     int size = 0;
-                    queue.add(new Vector2<>(x, y));
+                    queue.add(new Tuple2<>(x, y));
 
                     while (!queue.isEmpty()) {
-                        Vector2<Integer, Integer> v = queue.poll();
-                        int vx = v.getValue1();
-                        int vy = v.getValue2();
+                        Tuple2<Integer, Integer> v = queue.poll();
+                        int vx = v.val1();
+                        int vy = v.val2();
                         if (vy < 0 || vy >= map.size()) continue;
                         if (vx < 0 || vx >= map.get(vy).size()) continue;
                         if (map.get(vy).get(vx) == 9) continue;
 
                         for (int k = 0; k < 4; k++) {
-                            queue.add(new Vector2<>(vx + dx[k], vy + dy[k]));
+                            queue.add(new Tuple2<>(vx + dx[k], vy + dy[k]));
                         }
 
                         map.get(vy).set(vx, 9);

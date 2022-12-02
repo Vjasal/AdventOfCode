@@ -1,8 +1,8 @@
 package com.vjasal.aoc2020.day20;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Vector2;
-import com.vjasal.util.vectors.Vector3;
+import com.vjasal.util.vectors.Tuple2;
+import com.vjasal.util.vectors.Tuple3;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -12,7 +12,7 @@ public class Image {
     private static final Logger logger = Logger.getLogger(Image.class.getSimpleName());
 
     private final List<ImageTile> tiles = new LinkedList<>();
-    private final Map<Vector2<Integer, Integer>, ImageTile> tileMap = new HashMap<>();
+    private final Map<Tuple2<Integer, Integer>, ImageTile> tileMap = new HashMap<>();
 
     int maxX = Integer.MIN_VALUE;
     int maxY = Integer.MIN_VALUE;
@@ -57,16 +57,16 @@ public class Image {
     }
 
     private void orderTiles() {
-        Queue<Vector3<ImageTile, Integer, Integer>> queue = new LinkedList<>();
-        queue.add(new Vector3<>(tiles.get(0), 0, 0));
+        Queue<Tuple3<ImageTile, Integer, Integer>> queue = new LinkedList<>();
+        queue.add(new Tuple3<>(tiles.get(0), 0, 0));
         int[] dx = {  1,  0, -1,  0};
         int[] dy = {  0,  1,  0, -1};
 
         while (!queue.isEmpty()) {
-            Vector3<ImageTile, Integer, Integer> current = queue.poll();
-            ImageTile tile = current.getValue1();
-            int x = current.getValue2();
-            int y = current.getValue3();
+            Tuple3<ImageTile, Integer, Integer> current = queue.poll();
+            ImageTile tile = current.val1();
+            int x = current.val2();
+            int y = current.val3();
 
             if (contains(x, y)) continue;
             put(tile, x, y);
@@ -76,7 +76,7 @@ public class Image {
                 int nextY = y + dy[k];
 
                 if (contains(nextX, nextY)) continue;
-                if (queue.stream().anyMatch(v -> v.getValue2() == nextX && v.getValue3() == nextY)) continue;
+                if (queue.stream().anyMatch(v -> v.val2() == nextX && v.val3() == nextY)) continue;
 
                 long id = tile.getEdgeId(dx[k], dy[k]);
 
@@ -85,16 +85,16 @@ public class Image {
                         .filter(imageTile -> imageTile.containsEdgeId(id))
                         .findFirst();
 
-                if (!nextTile.isPresent()) continue;
+                if (nextTile.isEmpty()) continue;
 
                 nextTile.get().orientateTile(dx[k], dy[k], id);
-                queue.add(new Vector3<>(nextTile.get(), nextX, nextY));
+                queue.add(new Tuple3<>(nextTile.get(), nextX, nextY));
             }
         }
     }
 
     private void put(ImageTile tile, int x, int y) {
-        tileMap.put(new Vector2<>(x, y), tile);
+        tileMap.put(new Tuple2<>(x, y), tile);
 
         if (maxX < x) maxX = x;
         if (maxY < y) maxY = y;
@@ -103,11 +103,11 @@ public class Image {
     }
 
     private ImageTile getTile(int x, int y) {
-        return tileMap.get(new Vector2<>(x, y));
+        return tileMap.get(new Tuple2<>(x, y));
     }
 
     private boolean contains(int x, int y) {
-        return tileMap.containsKey(new Vector2<>(x, y));
+        return tileMap.containsKey(new Tuple2<>(x, y));
     }
 
     @Override

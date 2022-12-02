@@ -2,7 +2,7 @@ package com.vjasal.aoc2020.day08;
 
 import com.vjasal.util.AocMainClass;
 import com.vjasal.util.CollectionUtil;
-import javafx.util.Pair;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,9 +21,9 @@ public class MainClass extends AocMainClass {
     @Override
     public long solvePuzzle1(String input) {
         List<String> program = CollectionUtil.toArrayList(input);
-        Pair<Boolean, Integer> result = simulateProgram(program);
-        logger.info("Result: " + result.getValue());
-        return result.getValue();
+        Tuple2<Boolean, Integer> result = simulateProgram(program);
+        logger.info("Result: " + result.val2());
+        return result.val2();
     }
 
     @Override
@@ -47,16 +47,16 @@ public class MainClass extends AocMainClass {
                 continue;
             }
 
-            Pair<Boolean, Integer> result = simulateProgram(copy);
-            programHalts = result.getKey();
-            accumulator  = result.getValue();
+            Tuple2<Boolean, Integer> result = simulateProgram(copy);
+            programHalts = result.val1();
+            accumulator  = result.val2();
         }
 
         logger.info("Result: " + accumulator);
         return accumulator;
     }
 
-    private Pair<Boolean, Integer> simulateProgram(List<String> program) {
+    private Tuple2<Boolean, Integer> simulateProgram(List<String> program) {
         int programCounter = 0;
         int accumulator    = 0;
 
@@ -64,25 +64,21 @@ public class MainClass extends AocMainClass {
 
         while (true) {
             if (seen.contains(programCounter))
-                return new Pair<>(false, accumulator);
+                return new Tuple2<>(false, accumulator);
             if (program.size() <= programCounter)
-                return new Pair<>(true, accumulator);
+                return new Tuple2<>(true, accumulator);
 
             seen.add(programCounter);
 
             String command = program.get(programCounter).split(" ")[0];
             String value   = program.get(programCounter).split(" ")[1];
             switch (command) {
-                case "acc":
+                case "acc" -> {
                     accumulator += Integer.parseInt(value);
                     programCounter += 1;
-                    break;
-                case "jmp":
-                    programCounter += Integer.parseInt(value);
-                    break;
-                case "nop":
-                    programCounter += 1;
-                    break;
+                }
+                case "jmp" -> programCounter += Integer.parseInt(value);
+                case "nop" -> programCounter += 1;
             }
         }
     }

@@ -32,7 +32,7 @@ public class MainClass extends AocMainClass {
             paper.execFold(fold);
         }
         logger.info("Result: " + paper);
-        return 0;
+        return paper.toString().hashCode();
     }
 
     public static void main(String[] args) {

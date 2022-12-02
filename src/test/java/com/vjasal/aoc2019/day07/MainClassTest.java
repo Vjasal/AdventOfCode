@@ -1,9 +1,8 @@
 package com.vjasal.aoc2019.day07;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class MainClassTest {
 
@@ -12,14 +11,14 @@ public class MainClassTest {
     @Test
     public void solvePuzzle1() {
         String input = mainClass.getInput();
-        assertNotNull("Input not found", input);
-        assertEquals(101490, mainClass.solvePuzzle1(input));
+        Assertions.assertNotNull(input, "Input not found");
+        Assertions.assertEquals(101490, mainClass.solvePuzzle1(input));
     }
 
     @Test
     public void solvePuzzle2() {
         String input = mainClass.getInput();
-        assertNotNull("Input not found", input);
-        assertEquals(61019896, mainClass.solvePuzzle2(input));
+        Assertions.assertNotNull(input, "Input not found");
+        Assertions.assertEquals(61019896, mainClass.solvePuzzle2(input));
     }
 }

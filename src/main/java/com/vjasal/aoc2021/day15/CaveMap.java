@@ -1,7 +1,7 @@
 package com.vjasal.aoc2021.day15;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class CaveMap {
 
-    private final Map<Vector2<Integer, Integer>, Integer> map = new HashMap<>();
+    private final Map<Tuple2<Integer, Integer>, Integer> map = new HashMap<>();
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public CaveMap(String input, int factor) {
-        Map<Vector2<Integer, Integer>, Integer> tmp = new HashMap<>();
+        Map<Tuple2<Integer, Integer>, Integer> tmp = new HashMap<>();
         List<String> lines = CollectionUtil.toArrayList(input);
 
         int width = 0;
@@ -26,18 +26,18 @@ public class CaveMap {
             width = values.size();
 
             for (int x = 0; x < values.size(); x++) {
-                Vector2<Integer, Integer> v = new Vector2<>(x, y);
+                Tuple2<Integer, Integer> v = new Tuple2<>(x, y);
                 tmp.put(v, values.get(x));
             }
         }
 
         for (int fy = 0; fy < factor; fy++) {
             for (int fx = 0; fx < factor; fx++) {
-                for (Map.Entry<Vector2<Integer, Integer>, Integer> entry : tmp.entrySet()) {
-                    int x = entry.getKey().getValue1() + fx * width;
-                    int y = entry.getKey().getValue2() + fy * height;
+                for (Map.Entry<Tuple2<Integer, Integer>, Integer> entry : tmp.entrySet()) {
+                    int x = entry.getKey().val1() + fx * width;
+                    int y = entry.getKey().val2() + fy * height;
                     int value = (entry.getValue() + fx + fy - 1) % 9 + 1;
-                    map.put(new Vector2<>(x, y), value);
+                    map.put(new Tuple2<>(x, y), value);
                 }
             }
         }
@@ -46,15 +46,15 @@ public class CaveMap {
         this.height = height * factor;
     }
 
-    public Vector2<Integer, Integer> getEndPosition() {
-        return new Vector2<>(height - 1, width - 1);
+    public Tuple2<Integer, Integer> getEndPosition() {
+        return new Tuple2<>(height - 1, width - 1);
     }
 
-    public int get(Vector2<Integer, Integer> vector) {
+    public int get(Tuple2<Integer, Integer> vector) {
         return map.get(vector);
     }
 
-    public boolean contains(Vector2<Integer, Integer> vector) {
+    public boolean contains(Tuple2<Integer, Integer> vector) {
         return map.containsKey(vector);
     }
 
@@ -63,7 +63,7 @@ public class CaveMap {
         StringBuilder sb = new StringBuilder("\n");
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                sb.append(map.get(new Vector2<>(x, y)));
+                sb.append(map.get(new Tuple2<>(x, y)));
             }
             sb.append("\n");
         }

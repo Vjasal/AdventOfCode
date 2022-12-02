@@ -1,14 +1,14 @@
 package com.vjasal.aoc2020.day17;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Vector4;
+import com.vjasal.util.vectors.Tuple4;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Hypercube {
 
-    private final Map<Vector4<Integer, Integer, Integer, Integer>, Character> values;
+    private final Map<Tuple4<Integer, Integer, Integer, Integer>, Character> values;
 
     private int minW = Integer.MAX_VALUE;
     private int minZ = Integer.MAX_VALUE;
@@ -96,7 +96,7 @@ public class Hypercube {
     }
 
     private void put(int x, int y, int z, int w, char value) {
-        values.put(new Vector4<>(x, y, z, w), value);
+        values.put(new Tuple4<>(x, y, z, w), value);
 
         if (maxW < w) maxW = w;
         if (maxZ < z) maxZ = z;
@@ -110,7 +110,7 @@ public class Hypercube {
     }
 
     private char get(int x, int y, int z, int w) {
-        return values.getOrDefault(new Vector4<>(x, y, z, w), '.');
+        return values.getOrDefault(new Tuple4<>(x, y, z, w), '.');
     }
 
     private void clear() {

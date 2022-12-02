@@ -1,20 +1,20 @@
 package com.vjasal.aoc2021.day15;
 
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.Objects;
 
 public class Path implements Comparable<Path> {
 
-    private final Vector2<Integer, Integer> position;
+    private final Tuple2<Integer, Integer> position;
     private final int riskLevel;
 
-    public Path(Vector2<Integer, Integer> position, int riskLevel) {
+    public Path(Tuple2<Integer, Integer> position, int riskLevel) {
         this.position = position;
         this.riskLevel = riskLevel;
     }
 
-    public Vector2<Integer, Integer> getPosition() {
+    public Tuple2<Integer, Integer> getPosition() {
         return position;
     }
 

@@ -1,6 +1,6 @@
 package com.vjasal.aoc2021.day17;
 
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,9 +10,9 @@ public class Probe {
     private static final Pattern pattern = Pattern.compile(
             "^target area: x=(-?\\d+)\\.\\.(-?\\d+), y=(-?\\d+)\\.\\.(-?\\d+)$");
 
-    private final Vector2<Integer, Integer> startPosition;
-    private final Vector2<Integer, Integer> t1;
-    private final Vector2<Integer, Integer> t2;
+    private final Tuple2<Integer, Integer> startPosition;
+    private final Tuple2<Integer, Integer> t1;
+    private final Tuple2<Integer, Integer> t2;
 
     public Probe(String target) {
         Matcher matcher = pattern.matcher(target);
@@ -22,39 +22,39 @@ public class Probe {
         int y1 = Integer.parseInt(matcher.group(3));
         int y2 = Integer.parseInt(matcher.group(4));
 
-        startPosition = new Vector2<>(0, 0);
-        t1 = new Vector2<>(x1, y1);
-        t2 = new Vector2<>(x2, y2);
+        startPosition = new Tuple2<>(0, 0);
+        t1 = new Tuple2<>(x1, y1);
+        t2 = new Tuple2<>(x2, y2);
     }
 
     public int getLowerXBound() {
-        return Math.min(0, t1.getValue1());
+        return Math.min(0, t1.val1());
     }
 
     public int getUpperXBound() {
-        return Math.max(0, t2.getValue1());
+        return Math.max(0, t2.val1());
     }
 
     public int getLowerYBound() {
-        return Math.abs(Math.min(t1.getValue2(), t2.getValue2())) * -1;
+        return Math.abs(Math.min(t1.val2(), t2.val2())) * -1;
     }
 
     public int getUpperYBound() {
-        return Math.abs(Math.min(t1.getValue2(), t2.getValue2()));
+        return Math.abs(Math.min(t1.val2(), t2.val2()));
     }
 
     public boolean simulate(int vx, int vy) {
-        int x = startPosition.getValue1();
-        int y = startPosition.getValue2();
+        int x = startPosition.val1();
+        int y = startPosition.val2();
 
-        while ((x < t1.getValue1() && y >= t1.getValue2()) || (y > t2.getValue2() && x <= t2.getValue1())) {
+        while ((x < t1.val1() && y >= t1.val2()) || (y > t2.val2() && x <= t2.val1())) {
             x += vx;
             y += vy;
             vx = stepX(vx);
             vy = stepY(vy);
         }
 
-        return x >= t1.getValue1() && x <= t2.getValue1() && y >= t1.getValue2() && y <= t2.getValue2();
+        return x >= t1.val1() && x <= t2.val1() && y >= t1.val2() && y <= t2.val2();
     }
 
     public int getHighestPositionForY(int vy) {

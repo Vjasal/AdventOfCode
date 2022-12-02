@@ -1,6 +1,6 @@
 package com.vjasal.aoc2021.day18;
 
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 public class SnailNumber {
 
@@ -68,29 +68,29 @@ public class SnailNumber {
         }
     }
 
-    private Vector2<Integer, Integer> explode(int depth) {
+    private Tuple2<Integer, Integer> explode(int depth) {
         if (value != null) {
             return null;
         }
 
         if (depth >= 4) {
-            Vector2<Integer, Integer> ret = new Vector2<>(left.value, right.value);
+            Tuple2<Integer, Integer> ret = new Tuple2<>(left.value, right.value);
             left  = null;
             right = null;
             value = 0;
             return ret;
         }
 
-        Vector2<Integer, Integer> resultLeft = left.explode(depth + 1);
+        Tuple2<Integer, Integer> resultLeft = left.explode(depth + 1);
         if (resultLeft != null) {
-            right.explodeLeft(resultLeft.getValue2());
-            return new Vector2<>(resultLeft.getValue1(), 0);
+            right.explodeLeft(resultLeft.val2());
+            return new Tuple2<>(resultLeft.val1(), 0);
         }
 
-        Vector2<Integer, Integer> resultRight = right.explode(depth + 1);
+        Tuple2<Integer, Integer> resultRight = right.explode(depth + 1);
         if (resultRight != null) {
-            left.explodeRight(resultRight.getValue1());
-            return new Vector2<>(0, resultRight.getValue2());
+            left.explodeRight(resultRight.val1());
+            return new Tuple2<>(0, resultRight.val2());
         }
 
         return null;

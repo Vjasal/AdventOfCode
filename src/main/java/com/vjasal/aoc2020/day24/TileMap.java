@@ -1,14 +1,14 @@
 package com.vjasal.aoc2020.day24;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.io.StringReader;
 import java.util.*;
 
 public class TileMap {
 
-    private final Set<Vector2<Integer, Integer>> flippedTiles = new HashSet<>();
+    private final Set<Tuple2<Integer, Integer>> flippedTiles = new HashSet<>();
 
     private int maxX = Integer.MIN_VALUE;
     private int maxY = Integer.MIN_VALUE;
@@ -16,28 +16,28 @@ public class TileMap {
     private int minY = Integer.MAX_VALUE;
 
     TileMap(String input) {
-        Set<Vector2<Integer, Integer>> flippedTiles = new HashSet<>();
+        Set<Tuple2<Integer, Integer>> flippedTiles = new HashSet<>();
         for (String line : CollectionUtil.toLinkedList(input)) {
             List<String> directions = parseLine(line);
-            Vector2<Integer, Integer> tile = getTile(directions);
+            Tuple2<Integer, Integer> tile = getTile(directions);
             if (flippedTiles.contains(tile)) {
                 flippedTiles.remove(tile);
             } else {
                 flippedTiles.add(tile);
             }
         }
-        for (Vector2<Integer, Integer> tile : flippedTiles) {
+        for (Tuple2<Integer, Integer> tile : flippedTiles) {
             add(tile);
         }
     }
 
-    private void add(Vector2<Integer, Integer> tile) {
+    private void add(Tuple2<Integer, Integer> tile) {
         flippedTiles.add(tile);
 
-        if (maxX < tile.getValue1()) maxX = tile.getValue1();
-        if (minX > tile.getValue1()) minX = tile.getValue1();
-        if (maxY < tile.getValue2()) maxY = tile.getValue2();
-        if (minY > tile.getValue2()) minY = tile.getValue2();
+        if (maxX < tile.val1()) maxX = tile.val1();
+        if (minX > tile.val1()) minX = tile.val1();
+        if (maxY < tile.val2()) maxY = tile.val2();
+        if (minY > tile.val2()) minY = tile.val2();
     }
 
     private void clear() {
@@ -54,7 +54,7 @@ public class TileMap {
     }
 
     void round() {
-        Set<Vector2<Integer, Integer>> copy = new HashSet<>(this.flippedTiles);
+        Set<Tuple2<Integer, Integer>> copy = new HashSet<>(this.flippedTiles);
         int maxX = this.maxX;
         int maxY = this.maxY;
         int minX = this.minX;
@@ -64,7 +64,7 @@ public class TileMap {
 
         for (int y = minY - 2; y < maxY + 2; y++) {
             for (int x = minX - 2; x < maxX + 2; x++) {
-                Vector2<Integer, Integer> next = new Vector2<>(x, y);
+                Tuple2<Integer, Integer> next = new Tuple2<>(x, y);
                 int count = countFlippedTiles(next, copy);
                 if (copy.contains(next) && count > 0 && count <= 2) {
                     add(next);
@@ -76,34 +76,26 @@ public class TileMap {
         }
     }
 
-    private static Vector2<Integer, Integer> getTile(List<String> directions) {
+    private static Tuple2<Integer, Integer> getTile(List<String> directions) {
         int x = 0;
         int y = 0;
         for (String direction : directions) {
             switch (direction) {
-                case "e":
-                    x += 1;
-                    break;
-                case "w":
-                    x -= 1;
-                    break;
-                case "ne":
+                case "e" -> x += 1;
+                case "w" -> x -= 1;
+                case "ne" -> {
                     x += 1;
                     y += 1;
-                    break;
-                case "nw":
-                    y += 1;
-                    break;
-                case "se":
-                    y -= 1;
-                    break;
-                case "sw":
+                }
+                case "nw" -> y += 1;
+                case "se" -> y -= 1;
+                case "sw" -> {
                     x -= 1;
                     y -= 1;
-                    break;
+                }
             }
         }
-        return new Vector2<>(x, y);
+        return new Tuple2<>(x, y);
     }
 
     private static List<String> parseLine(String input) {
@@ -122,13 +114,13 @@ public class TileMap {
         return result;
     }
 
-    private static int countFlippedTiles(Vector2<Integer, Integer> tile, Set<Vector2<Integer, Integer>> flippedTiles) {
+    private static int countFlippedTiles(Tuple2<Integer, Integer> tile, Set<Tuple2<Integer, Integer>> flippedTiles) {
         int[] dx = {1,  1,  0, -1, -1,  0};
         int[] dy = {0,  1,  1,  0, -1, -1};
 
         int result = 0;
         for (int k = 0; k < dx.length; k++) {
-            Vector2<Integer, Integer> next = new Vector2<>(tile.getValue1() + dx[k], tile.getValue2() + dy[k]);
+            Tuple2<Integer, Integer> next = new Tuple2<>(tile.val1() + dx[k], tile.val2() + dy[k]);
             if (flippedTiles.contains(next))
                 result += 1;
         }

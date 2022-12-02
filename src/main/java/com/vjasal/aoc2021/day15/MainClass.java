@@ -1,8 +1,7 @@
 package com.vjasal.aoc2021.day15;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.vectors.Vector2;
-import com.vjasal.util.vectors.VectorUtil;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.HashSet;
 import java.util.PriorityQueue;
@@ -37,7 +36,7 @@ public class MainClass extends AocMainClass {
         Queue<Path> queue = new PriorityQueue<>();
         Set<Path> seen = new HashSet<>();
 
-        queue.add(new Path(new Vector2<>(0, 0), 0));
+        queue.add(new Path(new Tuple2<>(0, 0), 0));
 
         while (!queue.isEmpty()) {
             Path path = queue.poll();
@@ -49,7 +48,7 @@ public class MainClass extends AocMainClass {
                 return path.getRiskLevel();
             }
 
-            for (Vector2<Integer, Integer> neighbour : VectorUtil.neighbours(path.getPosition(), false)) {
+            for (Tuple2<Integer, Integer> neighbour : Tuple2.neighbours(path.getPosition(), false)) {
                 if (map.contains(neighbour)) {
                     queue.add(new Path(neighbour, path.getRiskLevel() + map.get(neighbour)));
                 }

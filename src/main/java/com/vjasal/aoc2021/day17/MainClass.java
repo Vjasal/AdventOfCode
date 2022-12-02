@@ -1,7 +1,7 @@
 package com.vjasal.aoc2021.day17;
 
 import com.vjasal.util.AocMainClass;
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,16 +19,16 @@ public class MainClass extends AocMainClass {
     public long solvePuzzle1(String input) {
         Probe probe = new Probe(input);
 
-        List<Vector2<Integer, Integer>> hits = new LinkedList<>();
+        List<Tuple2<Integer, Integer>> hits = new LinkedList<>();
         for (int y = probe.getLowerYBound(); y <= probe.getUpperYBound(); y++) {
             for (int x = probe.getLowerXBound(); x <= probe.getUpperXBound(); x++) {
                 if (probe.simulate(x, y)) {
-                    hits.add(new Vector2<>(x, y));
+                    hits.add(new Tuple2<>(x, y));
                 }
             }
         }
 
-        int bestY = hits.stream().mapToInt(Vector2::getValue2).max().orElse(0);
+        int bestY = hits.stream().mapToInt(Tuple2::val2).max().orElse(0);
         int result = probe.getHighestPositionForY(bestY);
         logger.info("Result: " + result);
         return result;
@@ -38,11 +38,11 @@ public class MainClass extends AocMainClass {
     public long solvePuzzle2(String input) {
         Probe probe = new Probe(input);
 
-        List<Vector2<Integer, Integer>> hits = new LinkedList<>();
+        List<Tuple2<Integer, Integer>> hits = new LinkedList<>();
         for (int y = probe.getLowerYBound(); y <= probe.getUpperYBound(); y++) {
             for (int x = probe.getLowerXBound(); x <= probe.getUpperXBound(); x++) {
                 if (probe.simulate(x, y)) {
-                    hits.add(new Vector2<>(x, y));
+                    hits.add(new Tuple2<>(x, y));
                 }
             }
         }

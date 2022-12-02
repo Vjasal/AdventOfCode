@@ -1,6 +1,6 @@
 package com.vjasal.aoc2020.day20;
 
-import com.vjasal.util.vectors.Vector2;
+import com.vjasal.util.vectors.Tuple2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +27,7 @@ public class ImageProcessor {
             " #  #  #  #  #  #   ";
 
     private final char[][] image;
-    private final List<List<Vector2<Integer, Integer>>> patterns;
+    private final List<List<Tuple2<Integer, Integer>>> patterns;
 
     public ImageProcessor(char[][] image) {
         this.image = image;
@@ -36,7 +36,7 @@ public class ImageProcessor {
     }
 
     public long countWater() {
-        for (List<Vector2<Integer, Integer>> pattern : patterns) {
+        for (List<Tuple2<Integer, Integer>> pattern : patterns) {
             if (removeSeaMonsterTiles(pattern) > 0) {
                 break;
             }
@@ -46,23 +46,23 @@ public class ImageProcessor {
                 .sum();
     }
 
-    private int removeSeaMonsterTiles(List<Vector2<Integer, Integer>> pattern) {
+    private int removeSeaMonsterTiles(List<Tuple2<Integer, Integer>> pattern) {
         int removed = 0;
         for (int y = 0; y < image.length; y++) {
             for (int x = 0; x < image[y].length; x++) {
                 int finalX = x;
                 int finalY = y;
                 boolean match = pattern.stream().allMatch(v -> {
-                    int tmpX = finalX + v.getValue1();
-                    int tmpY = finalY + v.getValue2();
+                    int tmpX = finalX + v.val1();
+                    int tmpY = finalY + v.val2();
 
                     if (tmpY >= image.length) return false;
                     if (tmpX >= image[tmpY].length) return false;
                     return image[tmpY][tmpX] == '#';
                 });
                 if (match) {
-                    for (Vector2<Integer, Integer> v : pattern) {
-                        image[y + v.getValue2()][x + v.getValue1()] = 'O';
+                    for (Tuple2<Integer, Integer> v : pattern) {
+                        image[y + v.val2()][x + v.val1()] = 'O';
                     }
                     removed++;
                 }
@@ -82,12 +82,12 @@ public class ImageProcessor {
         }
     }
 
-    private List<Vector2<Integer, Integer>> getPatternCoordinates(char[][] pattern, Direction direction, boolean isFlipped) {
-        List<Vector2<Integer, Integer>> result = new LinkedList<>();
+    private List<Tuple2<Integer, Integer>> getPatternCoordinates(char[][] pattern, Direction direction, boolean isFlipped) {
+        List<Tuple2<Integer, Integer>> result = new LinkedList<>();
         for (int y = 0; y < getHeight(pattern, direction); y++) {
             for (int x = 0; x < getWidth(pattern, direction); x++) {
                 if (get(pattern, x, y, direction, isFlipped) == '#') {
-                    result.add(new Vector2<>(x, y));
+                    result.add(new Tuple2<>(x, y));
                 }
             }
         }
@@ -101,18 +101,12 @@ public class ImageProcessor {
         if (x < 0 || x >= w)  throw new IllegalArgumentException("Illegal x arg");
         if (y < 0 || y >= h) throw new IllegalArgumentException("Illegal y arg");
 
-        switch (direction) {
-            case UP:
-                return isFlipped ? pattern[y][w - x - 1] : pattern[y][x];
-            case DOWN:
-                return isFlipped ? pattern[pattern.length - y - 1][x] : pattern[h - y - 1][w - x - 1];
-            case LEFT:
-                return isFlipped ? pattern[x][y] : pattern[w - x - 1][y];
-            case RIGHT:
-                return isFlipped ? pattern[w - x - 1][h - y - 1] : pattern[x][h - y - 1];
-            default:
-                throw new IllegalStateException();
-        }
+        return switch (direction) {
+            case UP -> isFlipped ? pattern[y][w - x - 1] : pattern[y][x];
+            case DOWN -> isFlipped ? pattern[pattern.length - y - 1][x] : pattern[h - y - 1][w - x - 1];
+            case LEFT -> isFlipped ? pattern[x][y] : pattern[w - x - 1][y];
+            case RIGHT -> isFlipped ? pattern[w - x - 1][h - y - 1] : pattern[x][h - y - 1];
+        };
     }
 
     private int getWidth(char[][] pattern, Direction direction) {
