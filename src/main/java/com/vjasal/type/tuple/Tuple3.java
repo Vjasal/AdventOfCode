@@ -1,4 +1,4 @@
-package com.vjasal.util.vectors;
+package com.vjasal.type.tuple;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +35,10 @@ public record Tuple3<A, B, C>(A val1, B val2, C val3) {
             neighbours.add(new Tuple3<>(x, y, z));
         }
         return neighbours;
+    }
+
+    public static <A, B, C> Tuple3<A, B, C> valueOf(A val1, B val2, C val3) {
+        return new Tuple3<>(val1, val2, val3);
     }
 
     @Override

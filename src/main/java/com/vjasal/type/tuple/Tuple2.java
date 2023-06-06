@@ -1,9 +1,13 @@
-package com.vjasal.util.vectors;
+package com.vjasal.type.tuple;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public record Tuple2<A, B>(A val1, B val2) {
+
+    public static <A, B> Tuple2<A, B> valueOf(A val1, B val2) {
+        return new Tuple2<>(val1, val2);
+    }
 
     public static List<Tuple2<Integer, Integer>> neighbours(Tuple2<Integer, Integer> position, boolean diagonal) {
         int[] dx = { 0,  1,  0, -1,  1,  1, -1, -1};

@@ -1,6 +1,6 @@
 package com.vjasal.aoc2021.day18;
 
-import com.vjasal.util.vectors.Tuple2;
+import com.vjasal.type.tuple.Tuple2;
 
 public class SnailNumber {
 

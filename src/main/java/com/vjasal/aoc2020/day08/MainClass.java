@@ -2,7 +2,7 @@ package com.vjasal.aoc2020.day08;
 
 import com.vjasal.util.AocMainClass;
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Tuple2;
+import com.vjasal.type.tuple.Tuple2;
 
 import java.util.ArrayList;
 import java.util.HashSet;

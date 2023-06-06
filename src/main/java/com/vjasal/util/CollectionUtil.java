@@ -1,7 +1,10 @@
 package com.vjasal.util;
 
+import com.vjasal.type.Grid;
+
 import java.io.StringReader;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CollectionUtil {
@@ -77,6 +80,28 @@ public class CollectionUtil {
         HashSet<String> hashSet = new HashSet<>();
         readData(hashSet, input, delimiter);
         return hashSet;
+    }
+
+    public static Grid<String> toGrid(String input) {
+        return toGrid(input, "", String::new);
+    }
+
+    public static <T> Grid<T> toGrid(String input, Function<String, T> mapper) {
+        return toGrid(input, "", mapper);
+    }
+
+    public static <T> Grid<T> toGrid(String input, String lineDelimiter, Function<String, T> mapper) {
+        Grid<T> grid = new Grid<>();
+
+        List<String> lines = toArrayList(input);
+        for (int y = 0; y < lines.size(); y++) {
+            List<String> line = toArrayList(lines.get(y), lineDelimiter);
+            for (int x = 0; x < line.size(); x++) {
+                grid.put(x, y, mapper.apply(line.get(x)));
+            }
+        }
+
+        return grid;
     }
 
     private static void readData(Collection<String> collection, String input, String delimiter) {

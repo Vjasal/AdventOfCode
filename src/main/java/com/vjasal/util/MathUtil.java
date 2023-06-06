@@ -2,19 +2,19 @@ package com.vjasal.util;
 
 public class MathUtil {
 
-    public static long mod(long a, long b) {
-        long result = a % b;
+    public static long mod(long a, long n) {
+        long result = a % n;
         if (result < 0)
-            result += b;
+            result += n;
         return result;
     }
 
-    public static long powMod(long a, long b, long m) {
+    public static long powMod(long a, long b, long n) {
         long result = 1;
-        a = mod(a, m);
+        a = mod(a, n);
         while (b != 0) {
-            result = (b & 1) == 0 ? result : mod(result * a, m);
-            a = mod(a * a, m);
+            result = (b & 1) == 0 ? result : result * a % n;
+            a = a * a % n;
             b /= 2;
         }
         return result;

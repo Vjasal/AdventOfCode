@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day24;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Tuple2;
+import com.vjasal.type.tuple.Tuple2;
 
 import java.io.StringReader;
 import java.util.*;

@@ -31,7 +31,7 @@ public class MainClass extends AocMainClass {
         for (String fold : CollectionUtil.toLinkedList(sections.get(1))) {
             paper.execFold(fold);
         }
-        logger.info("Result: " + paper);
+        logger.info("Result:\n" + paper);
         return paper.toString().hashCode();
     }
 

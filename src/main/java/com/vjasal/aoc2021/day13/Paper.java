@@ -1,7 +1,7 @@
 package com.vjasal.aoc2021.day13;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Tuple2;
+import com.vjasal.type.tuple.Tuple2;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -69,7 +69,7 @@ public class Paper {
         int maxX = dots.stream().mapToInt(Tuple2::val1).max().orElseThrow(IllegalStateException::new);
         int maxY = dots.stream().mapToInt(Tuple2::val2).max().orElseThrow(IllegalStateException::new);
 
-        StringBuilder sb = new StringBuilder("\n");
+        StringBuilder sb = new StringBuilder();
         for (int y = 0; y <= maxY; y++) {
             for (int x = 0; x <= maxX; x++) {
                 sb.append(dots.contains(new Tuple2<>(x, y)) ? "##" : "  ");

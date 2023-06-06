@@ -17,7 +17,14 @@ public class MainClassTest {
     @Test
     public void solvePuzzle2() {
         String input = mainClass.getInput();
+        String expectedResult = "" +
+                "######    ##    ##    ####    ##        ######      ####    ######      ####  \n" +
+                "##    ##  ##    ##  ##    ##  ##        ##    ##  ##    ##  ##    ##  ##    ##\n" +
+                "##    ##  ########  ##    ##  ##        ##    ##  ##        ##    ##  ##    ##\n" +
+                "######    ##    ##  ########  ##        ######    ##        ######    ########\n" +
+                "##  ##    ##    ##  ##    ##  ##        ##  ##    ##    ##  ##  ##    ##    ##\n" +
+                "##    ##  ##    ##  ##    ##  ########  ##    ##    ####    ##    ##  ##    ##\n";
         Assertions.assertNotNull(input, "Input not found");
-        Assertions.assertEquals("RHALRCRA".hashCode(), mainClass.solvePuzzle2(input));
+        Assertions.assertEquals(expectedResult.hashCode(), mainClass.solvePuzzle2(input));
     }
 }

@@ -1,7 +1,7 @@
 package com.vjasal.aoc2020.day17;
 
 import com.vjasal.util.CollectionUtil;
-import com.vjasal.util.vectors.Tuple4;
+import com.vjasal.type.tuple.Tuple4;
 
 import java.util.HashMap;
 import java.util.Map;
