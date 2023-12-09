@@ -32,4 +32,16 @@ public class MathUtil {
         return a & (a ^ (1L << i));
     }
 
+    public static long lcm(long a, long b) {
+        if (a == 0 || b == 0) {
+            return 0;
+        }
+        long absHigherNumber = Math.max(Math.abs(a), Math.abs(b));
+        long absLowerNumber = Math.min(Math.abs(a), Math.abs(b));
+        long lcm = absHigherNumber;
+        while (lcm % absLowerNumber != 0) {
+            lcm += absHigherNumber;
+        }
+        return lcm;
+    }
 }
