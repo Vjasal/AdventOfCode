@@ -75,7 +75,7 @@ public class MainClass extends AocMainClass {
             }
         }
 
-        logger.info("" + grid.toString(Material.AIR, m -> switch (m) {
+        logger.info("" + grid.toString(".", m -> switch (m) {
             case AIR -> ".";
             case ROCK -> "#";
             case SAND -> "o";

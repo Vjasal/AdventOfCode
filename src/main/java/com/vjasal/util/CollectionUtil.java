@@ -97,7 +97,9 @@ public class CollectionUtil {
         for (int y = 0; y < lines.size(); y++) {
             List<String> line = toArrayList(lines.get(y), lineDelimiter);
             for (int x = 0; x < line.size(); x++) {
-                grid.put(x, y, mapper.apply(line.get(x)));
+                T val = mapper.apply(line.get(x));
+                if (val != null)
+                    grid.put(x, y, val);
             }
         }
 

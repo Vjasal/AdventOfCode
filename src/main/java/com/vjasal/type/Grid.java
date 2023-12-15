@@ -125,12 +125,15 @@ public class Grid<T> {
         return maxY;
     }
 
-    public String toString(T defaultValue, Function<T, String> mapper) {
+    public String toString(String defaultValue, Function<T, String> mapper) {
         StringBuilder sb = new StringBuilder("\n");
 
-        for (int y = maxY; y >= minY; y--) {
+        for (int y = minY; y <= maxY; y++) {
             for (int x = minX; x <= maxX; x++) {
-                sb.append(mapper.apply(get(x, y, defaultValue)));
+                if (containsKey(x, y))
+                    sb.append(mapper.apply(get(x, y)));
+                else
+                    sb.append(defaultValue);
             }
             sb.append("\n");
         }
