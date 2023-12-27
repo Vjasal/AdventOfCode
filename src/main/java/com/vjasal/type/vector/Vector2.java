@@ -23,6 +23,33 @@ public record Vector2<T>(T val1, T val2) {
         public Vector2<Integer> getValue() {
             return value;
         }
+
+        public Direction toLeft() {
+            return switch (this) {
+                case UP -> LEFT;
+                case DOWN -> RIGHT;
+                case LEFT -> DOWN;
+                case RIGHT -> UP;
+            };
+        }
+
+        public Direction toRight() {
+            return switch (this) {
+                case UP -> RIGHT;
+                case DOWN -> LEFT;
+                case LEFT -> UP;
+                case RIGHT -> DOWN;
+            };
+        }
+
+        public Direction back() {
+            return switch (this) {
+                case UP -> DOWN;
+                case DOWN -> UP;
+                case LEFT -> RIGHT;
+                case RIGHT -> LEFT;
+            };
+        }
     }
 
 
@@ -36,6 +63,10 @@ public record Vector2<T>(T val1, T val2) {
 
     public static Vector2<Integer> add(Vector2<Integer> v1, Vector2.Direction direction) {
         return new Vector2<>(v1.val1 + direction.value.val1, v1.val2 + direction.value.val2);
+    }
+
+    public static Vector2<Integer> add(Vector2<Integer> v1, Vector2.Direction direction, int length) {
+        return new Vector2<>(v1.val1 + length * direction.value.val1, v1.val2 + length * direction.value.val2);
     }
 
     public static Vector2<Integer> subtract(Vector2<Integer> v1, Vector2<Integer> v2) {

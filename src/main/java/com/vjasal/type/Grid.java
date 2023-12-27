@@ -73,6 +73,11 @@ public class Grid<T> {
         return grid.get(position);
     }
 
+    public T get(Vector2<Integer> position, T defaultValue) {
+        T value = grid.get(position);
+        return value == null ? defaultValue : value;
+    }
+
     public Set<Map.Entry<Vector2<Integer>, T>> entrySet() {
         return grid.entrySet();
     }
@@ -123,6 +128,11 @@ public class Grid<T> {
 
     public int maxY() {
         return maxY;
+    }
+
+    public boolean isInside(Vector2<Integer> position) {
+        return minX <= position.val1() && maxX >= position.val1() &&
+                minY <= position.val2() && maxY >= position.val2();
     }
 
     public String toString(String defaultValue, Function<T, String> mapper) {
