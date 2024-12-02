@@ -7,7 +7,7 @@ public class MainClass extends AocMainClass {
     private static final Logger logger = Logger.getLogger(MainClass.class.getName());
 
     public MainClass() {
-        super(2023, 1);
+        super(2024, 1);
     }
 
     @Override
